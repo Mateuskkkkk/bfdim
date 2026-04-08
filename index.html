@@ -3,99 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ConcreteStruct — CRT0146</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>ConcreteStruct — CRT0146 UFC Crateús</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* ── RESET & ROOT ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0e0f11;--surface:#16181c;--surface2:#1e2126;--surface3:#262a31;
-  --border:#2e333c;--border2:#3a414e;--accent:#e8c547;--accent2:#c8a830;
-  --text:#e8eaf0;--text2:#9aa0af;--text3:#626878;
-  --green:#4ade80;--red:#f87171;--blue:#60a5fa;--orange:#fb923c;--purple:#a78bfa;
-  --font-title:'Syne',sans-serif;--font-body:'Inter',sans-serif;--font-mono:'IBM Plex Mono',monospace;
-  --radius:8px;--radius-lg:12px;
+  --bg:#0a0b0d;--sur:#111318;--sur2:#181c22;--sur3:#1f242d;
+  --bd:#252c38;--bd2:#30394a;
+  --acc:#e8c547;--acc2:#c8a830;--acc3:rgba(232,197,71,.12);
+  --tx:#dde1ea;--tx2:#8a93a6;--tx3:#4e5668;
+  --green:#3dd68c;--red:#f06b6b;--blue:#5ba4f5;--orange:#f59e0b;--purple:#a78bfa;
+  --ftitle:'Syne',sans-serif;--fbody:'Inter',sans-serif;--fmono:'IBM Plex Mono',monospace;
+  --r:6px;--rlg:10px;
 }
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:14px;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
-.header{border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:16px;height:56px;position:sticky;top:0;background:var(--bg);z-index:100}
-.logo{font-family:var(--font-title);font-weight:800;font-size:18px;color:var(--accent);letter-spacing:-0.5px;display:flex;align-items:center;gap:8px}
-.logo-icon{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.layout{display:flex;flex:1;overflow:hidden}
-.sidebar{width:240px;min-width:240px;border-right:1px solid var(--border);overflow-y:auto;padding:16px 0;background:var(--surface)}
-.sidebar-section{padding:8px 16px 4px;font-size:10px;font-weight:600;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;font-family:var(--font-mono)}
-.sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;border-left:2px solid transparent;transition:all .15s;color:var(--text2);font-size:13px}
-.sidebar-item:hover{background:var(--surface2);color:var(--text)}
-.sidebar-item.active{background:var(--surface2);border-left-color:var(--accent);color:var(--text)}
-.step-num{width:20px;height:20px;border-radius:50%;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:10px;font-family:var(--font-mono);font-weight:500;color:var(--text3);flex-shrink:0}
-.sidebar-item.active .step-num{background:var(--accent);color:#000}
-.step-label{flex:1;font-size:12px}
-.sidebar-badge{font-size:9px;padding:2px 6px;border-radius:10px;font-family:var(--font-mono);font-weight:500}
-.badge-work{background:#2d2208;color:var(--accent);border:1px solid #4a380f}
-.badge-todo{background:var(--surface3);color:var(--text3)}
-.main{flex:1;overflow-y:auto;padding:28px 32px}
-.page{display:none}
-.page.active{display:block;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.page-header{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
-.page-title{font-family:var(--font-title);font-size:26px;font-weight:700;color:var(--text);margin-bottom:6px}
-.page-subtitle{color:var(--text2);font-size:13px;display:flex;align-items:center;gap:8px}
-.tag{font-size:10px;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-weight:500;background:#2a1f0a;color:var(--accent);border:1px solid #4a3815}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:16px}
-.card-title{font-family:var(--font-title);font-size:14px;font-weight:600;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.card-title .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.form-group{margin-bottom:14px}
-label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:500}
-input,select,textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:13px;padding:8px 12px;transition:border-color .15s;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-input[type="number"]{font-family:var(--font-mono)}
-select option{background:var(--surface2)}
-.btn{padding:9px 18px;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;font-family:var(--font-body);display:inline-flex;align-items:center;gap:6px}
-.btn-primary{background:var(--accent);color:#000}
-.btn-primary:hover{background:var(--accent2)}
-.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
-.btn-secondary:hover{background:var(--surface3)}
-.btn-danger{background:transparent;color:var(--red);border:1px solid #4a1515;padding:4px 10px;font-size:11px}
-.btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-.result-box{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius);padding:16px 20px;margin-top:16px;font-family:var(--font-mono);font-size:13px;line-height:1.8}
-.result-value{font-size:22px;font-weight:500;color:var(--accent);display:block;margin-bottom:4px}
-.result-label{color:var(--text2);font-size:11px}
-.result-ok{color:var(--green)}
-.result-warn{color:var(--orange)}
-.result-fail{color:var(--red)}
-.metric{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;text-align:center}
-.metric-value{font-size:22px;font-weight:600;font-family:var(--font-mono);color:var(--accent);display:block}
-.metric-label{font-size:10px;color:var(--text3);margin-top:4px;font-family:var(--font-mono)}
-.tbl{width:100%;border-collapse:collapse;font-size:12px;font-family:var(--font-mono)}
-.tbl th{background:var(--surface3);color:var(--text2);padding:8px 12px;text-align:left;font-weight:500;border-bottom:1px solid var(--border2);font-size:11px}
-.tbl td{padding:7px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
-.tbl tr:hover td{background:var(--surface2)}
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px}
-.tab{padding:10px 18px;cursor:pointer;font-size:13px;color:var(--text2);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;font-weight:500}
-.tab:hover{color:var(--text)}
-.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-.alert{border-radius:var(--radius);padding:12px 16px;margin-bottom:14px;font-size:13px;display:flex;align-items:flex-start;gap:10px;border:1px solid}
-.alert-info{background:#0c1a2e;border-color:#1a3a5c;color:#7ab8f0}
-.alert-warn{background:#2a1a08;border-color:#5a3a10;color:var(--orange)}
-.alert-ok{background:#0a2018;border-color:#1a4a28;color:var(--green)}
-.alert-err{background:#2a0d0d;border-color:#5a1a1a;color:var(--red)}
-.formula{background:var(--surface3);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;font-family:var(--font-mono);font-size:12px;color:var(--text2);margin:12px 0;white-space:pre-wrap;overflow-x:auto;line-height:1.8}
-.section-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text3);font-family:var(--font-mono);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
-.class-tag{display:inline-block;padding:4px 12px;border-radius:4px;font-family:var(--font-mono);font-size:13px;font-weight:600;margin-top:6px}
-.class-ok{background:#0a2018;color:var(--green);border:1px solid #1a4a28}
-.class-warn{background:#2a1a08;color:var(--orange);border:1px solid #5a3a10}
-.class-fail{background:#2a0d0d;color:var(--red);border:1px solid #5a1a1a}
+body{background:var(--bg);color:var(--tx);font-family:var(--fbody);font-size:13px;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
 ::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-@media(max-width:900px){.sidebar{width:180px;min-width:180px}.main{padding:20px 16px}.grid-3,.grid-4{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.sidebar{display:none}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:3px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .2s ease forwards}
+
+/* ── LAYOUT ── */
+.header{border-bottom:1px solid var(--bd);padding:0 24px;display:flex;align-items:center;gap:14px;height:56px;position:sticky;top:0;background:var(--bg);z-index:100}
+.logo{font-family:var(--ftitle);font-weight:800;font-size:18px;color:var(--acc);letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.logo-icon{width:28px;height:28px;background:var(--acc);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.layout{display:flex;flex:1;overflow:hidden}
+.sidebar{width:250px;min-width:250px;border-right:1px solid var(--bd);overflow-y:auto;padding:14px 0;background:var(--sur)}
+.sbar-sec{padding:7px 16px 3px;font-size:10px;font-weight:600;letter-spacing:1.4px;color:var(--tx3);text-transform:uppercase;font-family:var(--fmono);margin-top:6px}
+.sbar-item{display:flex;align-items:center;gap:9px;padding:9px 16px;cursor:pointer;border-left:2px solid transparent;transition:all .15s;color:var(--tx2);font-size:12px}
+.sbar-item:hover{background:var(--sur2);color:var(--tx)}
+.sbar-item.active{background:var(--sur2);border-left-color:var(--acc);color:var(--tx)}
+.sbar-item.disabled{opacity:.4;cursor:default}
+.step-num{width:20px;height:20px;border-radius:50%;background:var(--sur3);display:flex;align-items:center;justify-content:center;font-size:10px;font-family:var(--fmono);font-weight:500;color:var(--tx3);flex-shrink:0}
+.sbar-item.active .step-num{background:var(--acc);color:#000}
+.badge{font-size:9px;padding:2px 6px;border-radius:10px;font-family:var(--fmono);font-weight:500;background:#2d2208;color:var(--acc);border:1px solid #4a380f}
+.badge.soon{background:var(--sur3);color:var(--tx3);border:none}
+.main{flex:1;overflow-y:auto;padding:28px 32px}
+.page{display:none}.page.active{display:block;animation:fadeUp .2s ease}
+
+/* ── COMPONENTS ── */
+.ph{margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--bd)}
+.ph-title{font-family:var(--ftitle);font-size:24px;font-weight:700;margin-bottom:5px}
+.ph-sub{color:var(--tx2);font-size:12px;display:flex;align-items:center;gap:8px}
+.tag{font-size:10px;padding:2px 8px;border-radius:4px;font-family:var(--fmono);font-weight:500;background:#2a1f0a;color:var(--acc);border:1px solid #4a3815}
+.card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--rlg);padding:18px 22px;margin-bottom:14px}
+.ctitle{font-family:var(--ftitle);font-size:13px;font-weight:700;color:var(--tx);margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--acc);flex-shrink:0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fg{margin-bottom:11px}
+label{display:block;font-size:11px;color:var(--tx2);margin-bottom:4px;font-weight:500}
+input,select,textarea{width:100%;background:var(--sur2);border:1px solid var(--bd);border-radius:var(--r);color:var(--tx);font-family:var(--fbody);font-size:12px;padding:7px 10px;transition:border-color .15s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+input[type=number]{font-family:var(--fmono)}
+select option{background:var(--sur2)}
+.btn{padding:8px 16px;border-radius:var(--r);font-size:12px;font-weight:500;cursor:pointer;border:none;transition:all .15s;font-family:var(--fbody);display:inline-flex;align-items:center;gap:5px}
+.btn-p{background:var(--acc);color:#000}.btn-p:hover{background:var(--acc2)}
+.btn-s{background:var(--sur2);color:var(--tx);border:1px solid var(--bd)}.btn-s:hover{background:var(--sur3)}
+.btn-d{background:transparent;color:var(--red);border:1px solid #4a1515;padding:4px 8px;font-size:10px}
+.btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.metric{background:var(--sur2);border:1px solid var(--bd);border-radius:var(--r);padding:12px 14px;text-align:center}
+.metric-v{font-size:20px;font-weight:600;font-family:var(--fmono);color:var(--acc)}
+.metric-l{font-size:10px;color:var(--tx3);margin-top:3px;font-family:var(--fmono)}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;font-family:var(--fmono)}
+.tbl th{background:var(--sur3);color:var(--tx2);padding:7px 10px;text-align:left;font-weight:500;border-bottom:1px solid var(--bd2);font-size:10px;white-space:nowrap}
+.tbl td{padding:6px 10px;border-bottom:1px solid var(--bd);color:var(--tx);vertical-align:middle}
+.tbl tr:hover td{background:var(--sur2)}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--bd);margin-bottom:18px}
+.tab{padding:9px 16px;cursor:pointer;font-size:12px;color:var(--tx2);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;font-weight:500;white-space:nowrap}
+.tab:hover{color:var(--tx)}.tab.active{color:var(--acc);border-bottom-color:var(--acc)}
+.tp{display:none}.tp.active{display:block}
+.alert{border-radius:var(--r);padding:10px 14px;margin-bottom:12px;font-size:12px;display:flex;align-items:flex-start;gap:8px;border:1px solid}
+.alert-i{background:#0b1928;border-color:#1a3a5c;color:#7ab8f0}
+.alert-w{background:#231a08;border-color:#5a3a10;color:var(--orange)}
+.alert-ok{background:#0a1f16;border-color:#1a4a28;color:var(--green)}
+.alert-e{background:#230d0d;border-color:#5a1a1a;color:var(--red)}
+.formula{background:var(--sur3);border-left:3px solid var(--acc);border-radius:0 var(--r) var(--r) 0;padding:10px 14px;font-family:var(--fmono);font-size:11px;color:var(--tx2);margin:10px 0;white-space:pre-wrap;line-height:1.9}
+.classif{display:inline-block;padding:4px 12px;border-radius:4px;font-family:var(--fmono);font-size:12px;font-weight:600;margin-top:5px}
+.cl-ok{background:#0a1f16;color:var(--green);border:1px solid #1a4a28}
+.cl-warn{background:#231a08;color:var(--orange);border:1px solid #5a3a10}
+.cl-err{background:#230d0d;color:var(--red);border:1px solid #5a1a1a}
+.cl-blue{background:#0b1928;color:var(--blue);border:1px solid #1a3a5c}
+.si{font-size:10px;padding:2px 7px;border-radius:3px;font-family:var(--fmono)}
+.si-ok{background:#0a1f16;color:var(--green)}.si-warn{background:#231a08;color:var(--orange)}.si-err{background:#230d0d;color:var(--red)}
+canvas{display:block}
+.canvas-wrap{border:1px solid var(--bd2);border-radius:8px;overflow:hidden;background:var(--sur2)}
+/* small input */
+.sin{width:70px!important;font-size:11px!important;padding:4px 6px!important;font-family:var(--fmono)!important}
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="logo">
     <div class="logo-icon">
@@ -107,1162 +108,1364 @@ select option{background:var(--surface2)}
     </div>
     ConcreteStruct
   </div>
-  <div style="font-size:11px;color:var(--text3);font-family:var(--font-mono)">CRT0146 — UFC Crateús | Prof. Leandro Moreira</div>
-  <div style="margin-left:auto;font-size:11px;color:var(--text3);font-family:var(--font-mono)" id="headerInfo">Selecione uma etapa</div>
+  <span style="font-size:11px;color:var(--tx3);font-family:var(--fmono)">CRT0146 — UFC Crateús | Prof. Leandro Moreira</span>
+  <div style="margin-left:auto;font-size:11px;color:var(--tx3);font-family:var(--fmono)" id="hdr-info">—</div>
 </header>
 
 <div class="layout">
+
+<!-- ══════════ SIDEBAR ══════════ -->
 <aside class="sidebar">
-  <div class="sidebar-section">Trabalho 1</div>
-  <div class="sidebar-item active" onclick="showPage('p-lancamento',this)">
-    <div class="step-num">1</div><div class="step-label">Lançamento da Estrutura</div>
-    <span class="sidebar-badge badge-work">T1</span>
+  <div class="sbar-sec">Trabalho 1</div>
+  <div class="sbar-item active" onclick="nav('p-dados',this)">
+    <div class="step-num">★</div><span style="flex:1">Dados do Projeto</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('p-acoes',this)">
-    <div class="step-num">2</div><div class="step-label">Ações e Solicitações</div>
-    <span class="sidebar-badge badge-work">T1</span>
+  <div class="sbar-item" onclick="nav('p-planta',this)">
+    <div class="step-num">1</div><span style="flex:1">Lançamento / Pilares</span>
+    <span class="badge">T1</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('p-vento',this)">
-    <div class="step-num">3</div><div class="step-label">Forças do Vento</div>
-    <span class="sidebar-badge badge-work">T1</span>
+  <div class="sbar-item" onclick="nav('p-acoes',this)">
+    <div class="step-num">2</div><span style="flex:1">Ações e Solicitações</span>
+    <span class="badge">T1</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('p-alpha',this)">
-    <div class="step-num">4</div><div class="step-label">Parâmetros α e γZ</div>
-    <span class="sidebar-badge badge-work">T1</span>
+  <div class="sbar-item" onclick="nav('p-vento',this)">
+    <div class="step-num">3</div><span style="flex:1">Forças do Vento</span>
+    <span class="badge">T1</span>
   </div>
-  <div class="sidebar-section" style="margin-top:12px">Próximas Etapas</div>
-  <div class="sidebar-item" onclick="showPage('p-elu',this)">
-    <div class="step-num">5</div><div class="step-label">ELU — Dimensionamento</div>
-    <span class="sidebar-badge badge-todo">em breve</span>
+  <div class="sbar-item" onclick="nav('p-alpha',this)">
+    <div class="step-num">4</div><span style="flex:1">Parâm. α e γZ</span>
+    <span class="badge">T1</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('p-els',this)">
-    <div class="step-num">6</div><div class="step-label">ELS — Verificações</div>
-    <span class="sidebar-badge badge-todo">em breve</span>
+  <div class="sbar-sec" style="margin-top:10px">Próximas Etapas</div>
+  <div class="sbar-item disabled">
+    <div class="step-num">5</div><span style="flex:1">ELU — Dimensionamento</span>
+    <span class="badge soon">em breve</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('p-det',this)">
-    <div class="step-num">7</div><div class="step-label">Detalhamento</div>
-    <span class="sidebar-badge badge-todo">em breve</span>
+  <div class="sbar-item disabled">
+    <div class="step-num">6</div><span style="flex:1">ELS — Verificações</span>
+    <span class="badge soon">em breve</span>
   </div>
-  <div class="sidebar-section" style="margin-top:12px">Projeto</div>
-  <div class="sidebar-item" onclick="showPage('p-dados',this)">
-    <div class="step-num">★</div><div class="step-label">Dados do Projeto</div>
+  <div class="sbar-item disabled">
+    <div class="step-num">7</div><span style="flex:1">Detalhamento</span>
+    <span class="badge soon">em breve</span>
   </div>
-  <div class="sidebar-item" onclick="showPage('p-relatorio',this)">
-    <div class="step-num">R</div><div class="step-label">Relatório</div>
+  <div class="sbar-sec" style="margin-top:10px">Projeto</div>
+  <div class="sbar-item" onclick="nav('p-rel',this)">
+    <div class="step-num">R</div><span style="flex:1">Relatório</span>
   </div>
 </aside>
 
+<!-- ══════════ MAIN ══════════ -->
 <main class="main">
 
-<!-- PAGE: DADOS -->
-<div class="page" id="p-dados">
-  <div class="page-header">
-    <div class="page-title">Dados do Projeto</div>
-    <div class="page-subtitle"><span class="tag">CONFIG</span> Parâmetros fornecidos pelo professor</div>
+<!-- ─────── PAGE: DADOS ─────── -->
+<div class="page active fade-up" id="p-dados">
+  <div class="ph">
+    <div class="ph-title">Dados do Projeto</div>
+    <div class="ph-sub"><span class="tag">CONFIG</span> Parâmetros fornecidos pelo professor</div>
   </div>
-  <div class="alert alert-info">ℹ️ Preencha os dados do seu grupo. Eles serão usados em todos os cálculos.</div>
-  <div class="grid-2">
+  <div class="alert alert-i">ℹ️ Preencha os dados do grupo. Serão usados em todos os cálculos.</div>
+  <div class="g2">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Grupo</div>
-      <div class="form-group"><label>Integrantes e Matrículas</label>
+      <div class="ctitle"><div class="dot"></div>Grupo</div>
+      <div class="fg"><label>Integrantes e Matrículas</label>
         <textarea id="d-grupo" rows="3" placeholder="Aluno 1 — 123456&#10;Aluno 2 — 234567&#10;Aluno 3 — 345678"></textarea></div>
     </div>
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Material</div>
-      <div class="form-group"><label>fck (MPa)</label>
-        <select id="d-fck"><option value="20">20 MPa</option><option value="25" selected>25 MPa</option><option value="30">30 MPa</option><option value="35">35 MPa</option><option value="40">40 MPa</option></select></div>
-      <div class="form-group"><label>Aço</label>
-        <select id="d-aco"><option value="CA50" selected>CA-50 (fyk=500 MPa)</option><option value="CA60">CA-60 (fyk=600 MPa)</option></select></div>
-      <div class="form-group"><label>Classe de Agressividade (NBR 6118)</label>
-        <select id="d-caa"><option value="I">I — Fraca</option><option value="II" selected>II — Moderada</option><option value="III">III — Forte</option><option value="IV">IV — Muito Forte</option></select></div>
+      <div class="ctitle"><div class="dot"></div>Material</div>
+      <div class="fg"><label>fck (MPa)</label>
+        <select id="d-fck" onchange="recalcAll()">
+          <option value="20">20 MPa</option><option value="25" selected>25 MPa</option>
+          <option value="30">30 MPa</option><option value="35">35 MPa</option><option value="40">40 MPa</option>
+        </select></div>
+      <div class="fg"><label>Aço</label>
+        <select id="d-aco">
+          <option value="CA50" selected>CA-50 (fyk = 500 MPa)</option>
+          <option value="CA60">CA-60 (fyk = 600 MPa)</option>
+        </select></div>
+      <div class="fg"><label>Classe de Agressividade (NBR 6118)</label>
+        <select id="d-caa">
+          <option value="I">I — Fraca</option><option value="II" selected>II — Moderada</option>
+          <option value="III">III — Forte</option><option value="IV">IV — Muito Forte</option>
+        </select></div>
     </div>
   </div>
   <div class="card">
-    <div class="card-title"><div class="dot"></div>Vento e Localização</div>
-    <div class="grid-3">
-      <div class="form-group"><label>Cidade / Estado</label><input type="text" id="d-cidade" placeholder="Ex: Crateús - CE"></div>
-      <div class="form-group"><label>V₀ — Velocidade Básica (m/s)</label><input type="number" id="d-v0" value="30" min="20" max="50"></div>
-      <div class="form-group"><label>S₁ — Fator Topográfico</label><input type="number" id="d-s1" value="1.0" step="0.05"></div>
-      <div class="form-group"><label>S₃ — Fator Estatístico</label><input type="number" id="d-s3" value="1.0" step="0.01"></div>
-      <div class="form-group"><label>Rugosidade (NBR 6123)</label>
-        <select id="d-rug"><option value="I">I</option><option value="II">II</option><option value="III" selected>III</option><option value="IV">IV</option><option value="V">V</option></select></div>
-      <div class="form-group"><label>Classe</label>
-        <select id="d-cls"><option value="A" selected>A (dim ≤ 20m)</option><option value="B">B (dim ≤ 50m)</option><option value="C">C (dim > 50m)</option></select></div>
+    <div class="ctitle"><div class="dot"></div>Edificação e Vento</div>
+    <div class="g3">
+      <div class="fg"><label>Cidade / Estado</label>
+        <input type="text" id="d-cidade" placeholder="Ex: Crateús - CE" oninput="updateHdr()"></div>
+      <div class="fg"><label>V₀ — Velocidade básica (m/s)</label>
+        <input type="number" id="d-v0" value="30" min="20" max="55" oninput="recalcAll()"></div>
+      <div class="fg"><label>S₁ — Fator topográfico</label>
+        <input type="number" id="d-s1" value="1.0" step="0.05" oninput="recalcAll()"></div>
+      <div class="fg"><label>S₃ — Fator estatístico</label>
+        <input type="number" id="d-s3" value="1.0" step="0.01" oninput="recalcAll()"></div>
+      <div class="fg"><label>Categoria de rugosidade (NBR 6123)</label>
+        <select id="d-cat" onchange="recalcAll()">
+          <option value="I">I — Mar/lagos (b=1,10 p=0,060)</option>
+          <option value="II">II — Campo aberto (b=1,00 p=0,085)</option>
+          <option value="III" selected>III — Obstáculos isolados (b=0,94 p=0,10)</option>
+          <option value="IV">IV — Subúrbios (b=0,85 p=0,125)</option>
+          <option value="V">V — Centro cidades (b=0,74 p=0,150)</option>
+        </select></div>
+      <div class="fg"><label>Classe edificação</label>
+        <select id="d-cls" onchange="recalcAll()">
+          <option value="A" selected>A — dim ≤ 20 m (Fr=1,00)</option>
+          <option value="B">B — dim 20–50 m (Fr=0,98)</option>
+          <option value="C">C — dim &gt; 50 m (Fr=0,95)</option>
+        </select></div>
+    </div>
+    <div class="g2">
+      <div class="fg"><label>Turbulência do vento</label>
+        <select id="d-turb" onchange="setTurb()">
+          <option value="low">Baixa — Ca_x=1,33 / Ca_y=1,10 (casas vizinhas)</option>
+          <option value="high">Alta — Ca_x=1,60 / Ca_y=1,30</option>
+          <option value="custom">Personalizado</option>
+        </select></div>
+      <div></div>
+      <div class="fg"><label>Ca — Coef. arrasto dir. X (vento → fachada Y)</label>
+        <input type="number" id="d-cax" value="1.33" step="0.01" oninput="recalcAll()"></div>
+      <div class="fg"><label>Ca — Coef. arrasto dir. Y (vento → fachada X)</label>
+        <input type="number" id="d-cay" value="1.10" step="0.01" oninput="recalcAll()"></div>
     </div>
   </div>
-  <div class="btn-row">
-    <button class="btn btn-primary" onclick="showPage('p-lancamento',null)">Salvar e Ir ao Lançamento →</button>
+  <div class="btns">
+    <button class="btn btn-p" onclick="nav('p-planta',document.querySelector('.sbar-item:nth-child(3))'))">Salvar e ir ao Lançamento →</button>
   </div>
 </div>
 
-<!-- PAGE: LANÇAMENTO -->
-<div class="page active" id="p-lancamento">
-  <div class="page-header">
-    <div class="page-title">Etapa 1 — Lançamento da Estrutura</div>
-    <div class="page-subtitle"><span class="tag">TRABALHO 1</span> Sistema estrutural, pré-dimensionamento e definição dos pilares</div>
+<!-- ─────── PAGE: PLANTA ─────── -->
+<div class="page" id="p-planta">
+  <div class="ph">
+    <div class="ph-title">Etapa 1 — Lançamento da Estrutura</div>
+    <div class="ph-sub"><span class="tag">TRABALHO 1</span> Posicionamento de pilares na planta baixa</div>
   </div>
-  <div class="alert alert-warn">⚠️ A estrutura deve ser classificada como <strong>nós fixos</strong> nas duas direções. Se α &gt; 1,0, retornar e ajustar o lançamento.</div>
+  <div class="alert alert-w">⚠️ A estrutura deve ser <strong>nós fixos (0,6 &lt; α ≤ 1,0)</strong>. Se α &gt; 1,0 → refazer o lançamento com pilares mais robustos.</div>
 
   <div class="tabs">
-    <div class="tab active" onclick="switchTab('tl-geom',this)">Geometria Geral</div>
-    <div class="tab" onclick="switchTab('tl-predim',this)">Pré-Dimensionamento</div>
+    <div class="tab active" onclick="switchTab('tl-geom',this)">Geometria</div>
+    <div class="tab" onclick="switchTab('tl-planta',this)">Planta Baixa</div>
     <div class="tab" onclick="switchTab('tl-pilares',this)">Pilares</div>
-    <div class="tab" onclick="switchTab('tl-vigas',this)">Vigas</div>
-    <div class="tab" onclick="switchTab('tl-lajes',this)">Lajes</div>
+    <div class="tab" onclick="switchTab('tl-predim',this)">Pré-Dim.</div>
   </div>
 
-  <!-- GEOM -->
-  <div class="tab-panel active" id="tl-geom">
-    <div class="grid-2">
+  <!-- Geometria -->
+  <div class="tp active" id="tl-geom">
+    <div class="g2">
       <div class="card">
-        <div class="card-title"><div class="dot"></div>Pavimentos</div>
-        <div class="form-group"><label>N.º de Pavimentos Tipo</label>
-          <input type="number" id="l-npav" value="4" min="1" max="30" oninput="calcGeom()"></div>
-        <div class="form-group"><label>Pé-Direito (m)</label>
-          <input type="number" id="l-ped" value="3.0" step="0.1" oninput="calcGeom()"></div>
-        <div class="form-group"><label>Incluir Cobertura</label>
-          <select id="l-cob" onchange="calcGeom()"><option value="1">Sim</option><option value="0">Não</option></select></div>
-        <div class="result-box" style="margin-top:8px">
-          <span class="result-label">Altura Total H (m)</span>
-          <span class="result-value" id="res-H">—</span>
+        <div class="ctitle"><div class="dot"></div>Pavimentos</div>
+        <div class="fg"><label>N.º Pavimentos Tipo</label>
+          <input type="number" id="l-npav" value="4" min="1" max="30" oninput="recalcAll()"></div>
+        <div class="fg"><label>Pé-direito padrão (m)</label>
+          <input type="number" id="l-ped" value="3.0" step="0.05" oninput="recalcAll()"></div>
+        <div class="fg"><label>Pé-direito 1.º pavimento (m)</label>
+          <input type="number" id="l-ped1" value="3.0" step="0.05" oninput="recalcAll()"></div>
+        <div class="fg"><label>Incluir cobertura</label>
+          <select id="l-cob" onchange="recalcAll()"><option value="1">Sim</option><option value="0">Não</option></select></div>
+        <div class="metric" style="margin-top:10px">
+          <div class="metric-v" id="res-H">—</div>
+          <div class="metric-l">Altura Total H (m)</div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title"><div class="dot"></div>Dimensões em Planta</div>
-        <div class="form-group"><label>Comprimento Lx (m)</label>
-          <input type="number" id="l-Lx" value="12.0" step="0.5" oninput="calcGeom()"></div>
-        <div class="form-group"><label>Largura Ly (m)</label>
-          <input type="number" id="l-Ly" value="8.0" step="0.5" oninput="calcGeom()"></div>
-        <div class="result-box" style="margin-top:8px">
-          <span class="result-label">Área de Pavimento (m²)</span>
-          <span class="result-value" id="res-Apav">—</span>
+        <div class="ctitle"><div class="dot"></div>Dimensões em Planta</div>
+        <div class="fg"><label>Comprimento Lx (m)</label>
+          <input type="number" id="l-Lx" value="12.0" step="0.5" oninput="recalcAll()"></div>
+        <div class="fg"><label>Largura Ly (m)</label>
+          <input type="number" id="l-Ly" value="8.0" step="0.5" oninput="recalcAll()"></div>
+        <div class="fg"><label>Largura fachada vento X → L_fy (m)</label>
+          <input type="number" id="l-lfy" value="8.0" step="0.5" oninput="recalcAll()">
+          <small style="color:var(--tx3);font-size:10px">Dimensão real da fachada atingida pelo vento em X</small></div>
+        <div class="fg"><label>Largura fachada vento Y → L_fx (m)</label>
+          <input type="number" id="l-lfx" value="12.0" step="0.5" oninput="recalcAll()">
+          <small style="color:var(--tx3);font-size:10px">Dimensão real da fachada atingida pelo vento em Y</small></div>
+        <div class="metric" style="margin-top:10px">
+          <div class="metric-v" id="res-Apav">—</div>
+          <div class="metric-l">Área de Pavimento (m²)</div>
         </div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Visualização — Esboço do Edifício</div>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center">
-        <div>
-          <div class="section-title" style="text-align:center;margin-bottom:8px">Vista Frontal</div>
-          <canvas id="cFront" width="280" height="300" style="background:var(--surface2);border-radius:8px;border:1px solid var(--border);display:block"></canvas>
-        </div>
-        <div>
-          <div class="section-title" style="text-align:center;margin-bottom:8px">Planta Baixa</div>
-          <canvas id="cPlant" width="300" height="240" style="background:var(--surface2);border-radius:8px;border:1px solid var(--border);display:block"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title"><div class="dot"></div>Tabela de Pavimentos e Cotas</div>
-      <table class="tbl">
-        <thead><tr><th>Pavimento</th><th>Descrição</th><th>Cota (m)</th><th>Pé-Direito (m)</th></tr></thead>
-        <tbody id="tbody-pavs"></tbody>
-      </table>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="switchTab('tl-predim',document.querySelectorAll('.tab')[1]);calcPredim()">Próximo: Pré-Dimensionamento →</button>
+      <div class="ctitle"><div class="dot"></div>Tabela de Pavimentos e Cotas</div>
+      <table class="tbl"><thead><tr><th>Pav.</th><th>Descrição</th><th>Cota (m)</th><th>Pé-dir. (m)</th></tr></thead>
+        <tbody id="tbody-pavs"></tbody></table>
     </div>
   </div>
 
-  <!-- PRÉ-DIM -->
-  <div class="tab-panel" id="tl-predim">
+  <!-- Planta Baixa -->
+  <div class="tp" id="tl-planta">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Fórmulas de Pré-Dimensionamento — NBR 6118</div>
-      <div class="formula">VIGAS:   h ≥ L/12 (contínua)  |  h ≥ L/10 (biapoiada)  |  b ≥ h/3
-LAJES:   h ≥ L/40 (contínua)  |  h ≥ L/35 (biapoiada)   |  h_min = 7 cm (cobertura)
-PILARES: Ac ≥ Nd / (0,85·fcd + ρ_min·fyd)    fcd = fck/1,4    fyd = fyk/1,15</div>
-      <div class="grid-3">
-        <div>
-          <div class="section-title">Vigas</div>
-          <div class="form-group"><label>Vão típico (m)</label><input type="number" id="pd-vv" value="4.0" step="0.5" oninput="calcPredim()"></div>
-          <div class="form-group"><label>Tipo</label><select id="pd-tviga" onchange="calcPredim()"><option value="12">Contínua (L/12)</option><option value="10">Biapoiada (L/10)</option></select></div>
-          <div class="result-box"><span class="result-label">h_viga mín.</span><span class="result-value" id="pd-hv">—</span></div>
-          <div class="form-group" style="margin-top:12px"><label>h adotado (m)</label><input type="number" id="pd-hva" value="0.40" step="0.05"></div>
-          <div class="form-group"><label>b adotado (m)</label><input type="number" id="pd-bva" value="0.20" step="0.05"></div>
-        </div>
-        <div>
-          <div class="section-title">Lajes</div>
-          <div class="form-group"><label>Vão típico (m)</label><input type="number" id="pd-vl" value="4.0" step="0.5" oninput="calcPredim()"></div>
-          <div class="form-group"><label>Tipo</label><select id="pd-tlaje" onchange="calcPredim()"><option value="40">Contínua (L/40)</option><option value="35">Biapoiada (L/35)</option></select></div>
-          <div class="result-box"><span class="result-label">h_laje mín.</span><span class="result-value" id="pd-hl">—</span></div>
-          <div class="form-group" style="margin-top:12px"><label>h adotado (cm)</label><input type="number" id="pd-hla" value="12" step="1"></div>
-        </div>
-        <div>
-          <div class="section-title">Pilares</div>
-          <div class="form-group"><label>Nd por pilar (kN)</label><input type="number" id="pd-Nd" value="500" step="10" oninput="calcPredim()"></div>
-          <div class="form-group"><label>fck (MPa)</label><input type="number" id="pd-fck" value="25" step="5" oninput="calcPredim()"></div>
-          <div class="result-box"><span class="result-label">Ac mín. (cm²)</span><span class="result-value" id="pd-Ac">—</span></div>
-          <div class="form-group" style="margin-top:12px"><label>b adotado (m)</label><input type="number" id="pd-bpa" value="0.20" step="0.05"></div>
-          <div class="form-group"><label>h adotado (m)</label><input type="number" id="pd-hpa" value="0.40" step="0.05"></div>
-        </div>
+      <div class="ctitle"><div class="dot"></div>Planta Baixa Interativa</div>
+      <div class="alert alert-i">ℹ️ Clique em <strong>+ Pilar</strong>, preencha as dimensões e clique na planta para posicionar. Arraste pilares para mover. Clique em pilar para selecionar/excluir.</div>
+      <div class="canvas-wrap"><canvas id="cvs-planta" width="680" height="420" style="cursor:crosshair"></canvas></div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:5px;font-family:var(--fmono)">
+        Escala: 1 unidade = 1 m | Pilares exibidos em proporção real
       </div>
-      <div class="btn-row"><button class="btn btn-primary" onclick="calcPredim()">Calcular</button></div>
     </div>
-  </div>
-
-  <!-- PILARES -->
-  <div class="tab-panel" id="tl-pilares">
-    <div class="card">
-      <div class="card-title"><div class="dot"></div>Pilares — Definição das Seções Transversais</div>
-      <div class="alert alert-info" style="margin-bottom:16px">ℹ️ A inércia I dos pilares nas duas direções é usada no cálculo de α e γZ. I = b·h³/12.</div>
-      <table class="tbl" id="tbl-pilares">
-        <thead><tr><th>#</th><th>ID</th><th>bx (m)</th><th>hy (m)</th><th>by (m)</th><th>hx (m)</th><th>Ix (m⁴)</th><th>Iy (m⁴)</th><th>Nd (kN)</th><th></th></tr></thead>
-        <tbody id="tbody-pilares"></tbody>
-      </table>
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="addPilar()">+ Pilar</button>
-        <button class="btn btn-secondary" onclick="calcEI()">Calcular ΣEI</button>
+    <!-- Form add pilar -->
+    <div class="card" id="form-pilar" style="border-color:var(--acc)">
+      <div class="ctitle"><div class="dot"></div>Novo Pilar</div>
+      <div class="g3">
+        <div class="fg"><label>ID</label><input type="text" id="fp-id" value="P1" style="font-family:var(--fmono)"></div>
+        <div class="fg"><label>bx — largura dir. X (m)</label><input type="number" id="fp-bx" value="0.20" step="0.05"></div>
+        <div class="fg"><label>hx — altura dir. X (m)</label><input type="number" id="fp-hx" value="0.50" step="0.05"></div>
+        <div class="fg"><label>by — largura dir. Y (m)</label><input type="number" id="fp-by" value="0.20" step="0.05"></div>
+        <div class="fg"><label>hy — altura dir. Y (m)</label><input type="number" id="fp-hy" value="0.50" step="0.05"></div>
+        <div class="fg"><label>Nd — carga vertical (kN)</label><input type="number" id="fp-nd" value="500" step="50"></div>
       </div>
-      <div id="div-EI" style="display:none;margin-top:16px">
-        <div class="grid-4">
-          <div class="metric"><span class="metric-value" id="m-EIx">—</span><span class="metric-label">ΣEI_x (kN·m²)</span></div>
-          <div class="metric"><span class="metric-value" id="m-EIy">—</span><span class="metric-label">ΣEI_y (kN·m²)</span></div>
-          <div class="metric"><span class="metric-value" id="m-nPil">—</span><span class="metric-label">N.º Pilares</span></div>
-          <div class="metric"><span class="metric-value" id="m-sumNd">—</span><span class="metric-label">Σ Nd (kN)</span></div>
-        </div>
+      <div class="alert alert-w" id="alert-click" style="display:none">⚠️ Clique na planta para posicionar o pilar.</div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="startAddPilar()">Clique na planta para posicionar →</button>
+        <button class="btn btn-s" onclick="addPilarCenter()">+ Adicionar no centro</button>
+        <button class="btn btn-s" onclick="clearPilares()">Limpar todos</button>
       </div>
     </div>
   </div>
 
-  <!-- VIGAS -->
-  <div class="tab-panel" id="tl-vigas">
+  <!-- Pilares table -->
+  <div class="tp" id="tl-pilares">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Vigas</div>
-      <table class="tbl">
-        <thead><tr><th>#</th><th>ID</th><th>Vão (m)</th><th>b (m)</th><th>h (m)</th><th>Tipo</th><th></th></tr></thead>
-        <tbody id="tbody-vigas"></tbody>
-      </table>
-      <div class="btn-row"><button class="btn btn-primary" onclick="addViga()">+ Viga</button></div>
+      <div class="ctitle"><div class="dot"></div>Pilares — Seções Transversais e Rigidezes</div>
+      <div class="alert alert-i">ℹ️ Ix = bx·hx³/12 (flexão em X) | Iy = by·hy³/12 (flexão em Y). Usados no cálculo de α e γZ.</div>
+      <div style="overflow-x:auto">
+        <table class="tbl" id="tbl-pilares">
+          <thead><tr><th>#</th><th>ID</th><th>x(m)</th><th>y(m)</th><th>bx(m)</th><th>hx(m)</th><th>by(m)</th><th>hy(m)</th><th>Ix(m⁴)</th><th>Iy(m⁴)</th><th>Nd(kN)</th><th></th></tr></thead>
+          <tbody id="tbody-pilares"></tbody>
+        </table>
+      </div>
+      <div class="g4" style="margin-top:12px" id="div-EI"></div>
     </div>
   </div>
 
-  <!-- LAJES -->
-  <div class="tab-panel" id="tl-lajes">
+  <!-- Pré-dim -->
+  <div class="tp" id="tl-predim">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Lajes</div>
-      <table class="tbl">
-        <thead><tr><th>#</th><th>ID</th><th>lx (m)</th><th>ly (m)</th><th>h (cm)</th><th>λ=ly/lx</th><th>Tipo</th><th></th></tr></thead>
-        <tbody id="tbody-lajes"></tbody>
-      </table>
-      <div class="btn-row"><button class="btn btn-primary" onclick="addLaje()">+ Laje</button></div>
+      <div class="ctitle"><div class="dot"></div>Pré-Dimensionamento — NBR 6118</div>
+      <div class="formula">VIGAS:   h ≥ L/12 (contínua)   |  h ≥ L/10 (biapoiada)  |  b ≥ h/3  |  b_min = 12 cm
+LAJES:   h ≥ L/40 (contínua)   |  h ≥ L/35 (biapoiada)  |  h_min = 7 cm (cobertura)
+PILARES: Ac ≥ Nd / (0,85·fcd + ρ_min·fyd)      fcd = fck/1,4      fyd = fyk/1,15</div>
+      <div class="g3">
+        <div>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:8px;font-family:var(--fmono)">Vigas</div>
+          <div class="fg"><label>Vão típico (m)</label><input type="number" id="pd-vv" value="4.0" step="0.5" oninput="calcPredim()"></div>
+          <div class="fg"><label>Tipo</label>
+            <select id="pd-tv" onchange="calcPredim()">
+              <option value="12">Contínua (L/12)</option><option value="10">Biapoiada (L/10)</option>
+            </select></div>
+          <div class="metric" id="pd-viga-res"><div class="metric-v">—</div><div class="metric-l">h_viga mín. (cm)</div></div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:8px;font-family:var(--fmono)">Lajes</div>
+          <div class="fg"><label>Vão típico (m)</label><input type="number" id="pd-vl" value="4.0" step="0.5" oninput="calcPredim()"></div>
+          <div class="fg"><label>Tipo</label>
+            <select id="pd-tl" onchange="calcPredim()">
+              <option value="40">Contínua (L/40)</option><option value="35">Biapoiada (L/35)</option>
+            </select></div>
+          <div class="metric" id="pd-laje-res"><div class="metric-v">—</div><div class="metric-l">h_laje mín. (cm)</div></div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:8px;font-family:var(--fmono)">Pilares</div>
+          <div class="fg"><label>Nd por pilar (kN)</label><input type="number" id="pd-Nd" value="500" step="10" oninput="calcPredim()"></div>
+          <div class="metric" id="pd-pilar-res"><div class="metric-v">—</div><div class="metric-l">Ac mín. (cm²)</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- PAGE: AÇÕES -->
+<!-- ─────── PAGE: AÇÕES ─────── -->
 <div class="page" id="p-acoes">
-  <div class="page-header">
-    <div class="page-title">Etapa 2 — Ações e Solicitações</div>
-    <div class="page-subtitle"><span class="tag">TRABALHO 1</span> Cargas por pavimento — NBR 6120:2019 e NBR 6118</div>
+  <div class="ph">
+    <div class="ph-title">Etapa 2 — Ações e Solicitações</div>
+    <div class="ph-sub"><span class="tag">TRABALHO 1</span> Cargas por pavimento — NBR 6120:2019 e NBR 6118</div>
   </div>
   <div class="tabs">
     <div class="tab active" onclick="switchTab('ta-perm',this)">Permanentes</div>
     <div class="tab" onclick="switchTab('ta-var',this)">Variáveis</div>
     <div class="tab" onclick="switchTab('ta-comb',this)">Combinações ELU</div>
   </div>
-
-  <div class="tab-panel active" id="ta-perm">
+  <div class="tp active" id="ta-perm">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Cargas Permanentes (g) — NBR 6120</div>
+      <div class="ctitle"><div class="dot"></div>Cargas Permanentes (g) — NBR 6120</div>
       <div class="formula">g_total = PP_laje + revestimento + alvenaria + outros
-PP_laje = γ_c × h_laje = 25 × h_laje  [kN/m²]   (γ_c = 25 kN/m³)</div>
-      <div class="grid-2">
+PP_laje = γ_c × h_laje = 25 × h_laje  [kN/m²]    (γ_c = 25 kN/m³)</div>
+      <div class="g2">
         <div>
-          <div class="form-group"><label>PP Laje (kN/m²) = 25×h_laje</label><input type="number" id="a-pplaje" value="3.0" step="0.1" oninput="calcAcoes()"></div>
-          <div class="form-group"><label>Revestimento + Contrapiso (kN/m²)</label><input type="number" id="a-rev" value="1.0" step="0.1" oninput="calcAcoes()"></div>
-          <div class="form-group"><label>Alvenaria distribuída (kN/m²)</label><input type="number" id="a-alv" value="1.5" step="0.1" oninput="calcAcoes()"></div>
-          <div class="form-group"><label>Impermeabilização / outros (kN/m²)</label><input type="number" id="a-imp" value="0.5" step="0.1" oninput="calcAcoes()"></div>
+          <div class="fg"><label>PP Laje = 25 × h_laje (kN/m²)</label><input type="number" id="a-ppl" value="3.0" step="0.1" oninput="calcAcoes()"></div>
+          <div class="fg"><label>Revestimento + Contrapiso (kN/m²)</label><input type="number" id="a-rev" value="1.0" step="0.1" oninput="calcAcoes()"></div>
+          <div class="fg"><label>Alvenaria distribuída (kN/m²)</label><input type="number" id="a-alv" value="1.5" step="0.1" oninput="calcAcoes()"></div>
+          <div class="fg"><label>Impermeabilização / outros (kN/m²)</label><input type="number" id="a-imp" value="0.5" step="0.1" oninput="calcAcoes()"></div>
         </div>
         <div>
-          <div class="result-box">
-            <span class="result-label">Carga Permanente Total gk (kN/m²)</span>
-            <span class="result-value" id="res-gk">—</span>
-            <hr style="border-color:var(--border);margin:10px 0">
-            <span class="result-label">Valores típicos NBR 6120:</span><br>
-            <span style="color:var(--text2);font-size:11px">Revestimento cerâmico: 0,5–1,0 kN/m²<br>Contrapiso (5cm): ~1,0 kN/m²<br>Alvenaria 9cm: ~1,3 kN/m²<br>Alvenaria 14cm: ~2,2 kN/m²</span>
+          <div class="metric" style="margin-top:0" id="res-gk">
+            <div class="metric-v">—</div><div class="metric-l">gk total (kN/m²)</div>
+          </div>
+          <div style="background:var(--sur2);border:1px solid var(--bd);border-radius:var(--r);padding:12px;margin-top:10px;font-size:11px;color:var(--tx2);line-height:2;font-family:var(--fmono)">
+            Valores típicos NBR 6120:<br>
+            Cerâmica: 0,5–1,0 kN/m²<br>
+            Contrapiso 5cm: ~1,0 kN/m²<br>
+            Alvenaria 9cm: ~1,3 kN/m²<br>
+            Alvenaria 14cm: ~2,2 kN/m²
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="tab-panel" id="ta-var">
+  <div class="tp" id="ta-var">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Cargas Variáveis (q) — NBR 6120:2019</div>
-      <div class="formula">Residencial:  q = 1,5 kN/m²    Escritório: q = 2,0 kN/m²
-Comercial:    q = 3,0 kN/m²    Cobertura:  q = 1,0 kN/m²
-Corredor/esc: q = 3,0 kN/m²    Garagem:    q = 2,5 kN/m²</div>
-      <div class="grid-2">
+      <div class="ctitle"><div class="dot"></div>Cargas Variáveis (q) — NBR 6120:2019</div>
+      <div class="formula">Residencial: q=1,5 kN/m²   Escritório: q=2,0 kN/m²   Comercial: q=3,0 kN/m²
+Corredor:    q=3,0 kN/m²   Cobertura:  q=1,0 kN/m²   Garagem:    q=2,5 kN/m²</div>
+      <div class="g2">
         <div>
-          <div class="form-group"><label>Uso dos Pavimentos</label>
+          <div class="fg"><label>Uso dos Pavimentos</label>
             <select id="a-uso" onchange="setUsoCarga()">
               <option value="1.5">Residencial — 1,5 kN/m²</option>
               <option value="2.0">Escritório — 2,0 kN/m²</option>
               <option value="3.0">Comercial — 3,0 kN/m²</option>
               <option value="custom">Customizado</option>
             </select></div>
-          <div class="form-group"><label>qk — Pavimentos (kN/m²)</label><input type="number" id="a-qk" value="1.5" step="0.1"></div>
-          <div class="form-group"><label>qk_cob — Cobertura (kN/m²)</label><input type="number" id="a-qkcob" value="1.0" step="0.1"></div>
+          <div class="fg"><label>qk — Pavimentos (kN/m²)</label><input type="number" id="a-qk" value="1.5" step="0.1" oninput="recalcAll()"></div>
+          <div class="fg"><label>qk — Cobertura (kN/m²)</label><input type="number" id="a-qkcob" value="1.0" step="0.1" oninput="recalcAll()"></div>
         </div>
         <div>
-          <div class="result-box">
-            <div class="section-title">Coeficientes — NBR 6118 Tab. 11.1</div>
-            <table class="tbl" style="font-size:11px">
-              <tr><th>Coef.</th><th>Valor</th><th>Uso</th></tr>
-              <tr><td>γg</td><td style="color:var(--accent)">1,4</td><td>Perm. desfavorável</td></tr>
-              <tr><td>γq</td><td style="color:var(--accent)">1,4</td><td>Variável / vento</td></tr>
-              <tr><td>ψ₀ res.</td><td style="color:var(--accent)">0,5</td><td>Combinação normal</td></tr>
-              <tr><td>ψ₁ res.</td><td style="color:var(--accent)">0,4</td><td>Combinação frequente</td></tr>
-              <tr><td>ψ₂ res.</td><td style="color:var(--accent)">0,3</td><td>Combinação quase-perm.</td></tr>
+          <div style="background:var(--sur2);border:1px solid var(--bd);border-radius:var(--r);padding:14px">
+            <div style="font-size:10px;color:var(--tx3);font-family:var(--fmono);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Resumo de Cargas</div>
+            <table class="tbl">
+              <tr><td style="color:var(--tx2)">gk</td><td id="sum-gk" style="color:var(--acc);font-weight:600;text-align:right">— kN/m²</td></tr>
+              <tr><td style="color:var(--tx2)">qk pavimentos</td><td id="sum-qk" style="color:var(--acc);font-weight:600;text-align:right">— kN/m²</td></tr>
+              <tr><td style="color:var(--tx2)">qk cobertura</td><td id="sum-qkcob" style="color:var(--acc);font-weight:600;text-align:right">— kN/m²</td></tr>
+              <tr><td style="color:var(--tx2)">pk = gk+qk</td><td id="sum-pk" style="color:var(--green);font-weight:600;text-align:right">— kN/m²</td></tr>
             </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="tab-panel" id="ta-comb">
+  <div class="tp" id="ta-comb">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Combinações Normais ELU — NBR 6118 item 11.7</div>
-      <div class="formula">Fd = γg·Fg + γq·[Fq1 + Σψ0j·Fqj]
-
-Comb 1 (sem vento):  Fd = 1,4·g + 1,4·q
-Comb 2 (vento dom.): Fd = 1,4·g + 1,4·Fw + 1,4·0,5·q
-Comb 3 (q dom.):     Fd = 1,4·g + 1,4·q + 1,4·0,6·Fw</div>
-      <div class="grid-3">
-        <div class="form-group"><label>gk (kN/m²)</label><input type="number" id="c-g" value="6.0" step="0.1" oninput="calcComb()"></div>
-        <div class="form-group"><label>qk (kN/m²)</label><input type="number" id="c-q" value="1.5" step="0.1" oninput="calcComb()"></div>
-        <div class="form-group"><label>Fwk equivalente (kN/m²)</label><input type="number" id="c-fw" value="0.5" step="0.1" oninput="calcComb()"></div>
+      <div class="ctitle"><div class="dot"></div>Combinações Últimas ELU — NBR 6118 §11.7</div>
+      <div class="formula">Comb 1 (perm. dom.):  Fd = 1,4·g + 1,4·0,5·q + 1,4·0,6·Fw
+Comb 2 (vento dom.): Fd = 1,4·g + 1,4·0,5·q + 1,4·Fw     [alternativa: 0,93·Pk + Hk + Wk]
+Comb 3 (q dom.):     Fd = 1,4·g + 1,4·q    + 1,4·0,6·Fw</div>
+      <div class="g3">
+        <div class="fg"><label>gk (kN/m²)</label><input type="number" id="c-g" value="6.0" step="0.1" oninput="calcComb()"></div>
+        <div class="fg"><label>qk (kN/m²)</label><input type="number" id="c-q" value="1.5" step="0.1" oninput="calcComb()"></div>
+        <div class="fg"><label>Fwk equiv. (kN/m²)</label><input type="number" id="c-fw" value="0.5" step="0.1" oninput="calcComb()"></div>
       </div>
-      <div class="btn-row"><button class="btn btn-primary" onclick="calcComb()">Calcular Combinações</button></div>
-      <div id="res-comb" style="display:none;margin-top:16px">
-        <div class="grid-3">
-          <div class="metric"><span class="metric-value" id="c1r">—</span><span class="metric-label">Comb 1 (kN/m²)</span></div>
-          <div class="metric"><span class="metric-value" id="c2r">—</span><span class="metric-label">Comb 2 (kN/m²)</span></div>
-          <div class="metric"><span class="metric-value" id="c3r">—</span><span class="metric-label">Comb 3 (kN/m²)</span></div>
-        </div>
-        <div style="margin-top:12px;font-size:12px;color:var(--text2)">
-          Combinação governante: <span id="c-gov" style="color:var(--accent);font-family:var(--font-mono);font-weight:600">—</span>
-        </div>
+      <div class="g3" id="res-comb"></div>
+      <div style="margin-top:10px;font-size:12px;color:var(--tx2)">
+        Combinação governante: <span id="c-gov" style="color:var(--acc);font-family:var(--fmono);font-weight:600">—</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PAGE: VENTO -->
+<!-- ─────── PAGE: VENTO ─────── -->
 <div class="page" id="p-vento">
-  <div class="page-header">
-    <div class="page-title">Etapa 3 — Forças do Vento por Pavimento</div>
-    <div class="page-subtitle"><span class="tag">TRABALHO 1</span> NBR 6123:1988 — pressão dinâmica e força em cada andar</div>
+  <div class="ph">
+    <div class="ph-title">Etapa 3 — Forças do Vento por Pavimento</div>
+    <div class="ph-sub"><span class="tag">TRABALHO 1</span> NBR 6123:1988 — perfil de velocidades e forças de arrasto</div>
   </div>
-  <div class="alert alert-info">ℹ️ Calcule para as <strong>duas direções X e Y</strong>. O perfil de velocidade usa S₂ variável com a altura.</div>
+
+  <div class="alert alert-i">ℹ️ Método: Fw_i = Ca · q(z_i) · L_fachada · h_i (eq. 6.2.3 — Prof. Araújo). <br>
+  Calcular para as <strong>duas direções X e Y</strong>. Desaprumo Hi = αa · αn · Fvi incluído.</div>
+
   <div class="card">
-    <div class="card-title"><div class="dot"></div>Parâmetros do Vento — NBR 6123</div>
-    <div class="formula">Vk(z) = V₀ · S₁ · S₂(z) · S₃         S₂(z) = b · Fr · (z/10)^p
-q(z) = 0,613 · Vk(z)²  [N/m²]         Fw = Ca · q · Ae  [N]</div>
-    <div class="grid-3">
-      <div class="form-group"><label>V₀ (m/s)</label><input type="number" id="vt-v0" value="30" step="1"></div>
-      <div class="form-group"><label>S₁</label><input type="number" id="vt-s1" value="1.0" step="0.05"></div>
-      <div class="form-group"><label>S₃</label><input type="number" id="vt-s3" value="1.0" step="0.01"></div>
-      <div class="form-group"><label>Categoria Rugosidade</label>
-        <select id="vt-cat">
-          <option value="I">I — Mar/lagos (b=1,10 Fr=1,00 p=0,06)</option>
-          <option value="II">II — Campo aberto (b=1,00 Fr=1,00 p=0,085)</option>
-          <option value="III" selected>III — Obstáculos isolados (b=0,94 Fr=1,00 p=0,10)</option>
-          <option value="IV">IV — Subúrbios (b=0,86 Fr=0,98 p=0,12)</option>
-          <option value="V">V — Centro cidades (b=0,74 Fr=0,95 p=0,15)</option>
-        </select></div>
-      <div class="form-group"><label>Classe</label>
-        <select id="vt-cls"><option value="A" selected>A</option><option value="B">B</option><option value="C">C</option></select></div>
-      <div class="form-group"><label>Ca — Coef. arrasto fachada</label><input type="number" id="vt-Ca" value="1.2" step="0.1"></div>
-    </div>
-    <div class="grid-2">
-      <div class="form-group"><label>Largura da fachada — Dir. X (vento em X → fachada Y) (m)</label><input type="number" id="vt-fy" value="8.0" step="0.5"></div>
-      <div class="form-group"><label>Largura da fachada — Dir. Y (vento em Y → fachada X) (m)</label><input type="number" id="vt-fx" value="12.0" step="0.5"></div>
-    </div>
-    <div class="form-group"><label>Número de Pavimentos</label><input type="number" id="vt-npav" value="4" min="1" max="30"></div>
-    <div class="form-group"><label>Pé-Direito (m)</label><input type="number" id="vt-ped" value="3.0" step="0.1"></div>
-    <div class="btn-row"><button class="btn btn-primary" onclick="calcVento()">Calcular Forças de Vento</button></div>
+    <div class="ctitle"><div class="dot"></div>Parâmetros do Vento — NBR 6123:1988</div>
+    <div class="formula">S₂(z) = b · Fr · (z/10)^p      Vk(z) = V₀ · S₁ · S₂(z) · S₃      q(z) = 0,613·Vk²  [N/m²]
+Fw_i = Ca · q(zᵢ)/1000 · L_fachada · hᵢ   [kN]     (eq. 6.2.3 — aproximação por faixa)
+Desaprumo:  αa = 1/(100·√H) ≥ 1/200     αn = √((1+1/n)/2)     Hi = αa·αn·Fvi</div>
+    <div id="vento-params-info" class="g4" style="margin-bottom:12px"></div>
+    <div class="btns"><button class="btn btn-p" onclick="calcVento()">⚙ Calcular Forças de Vento</button></div>
   </div>
 
   <div id="div-vento-res" style="display:none">
-    <div class="card">
-      <div class="card-title"><div class="dot"></div>Parâmetros S₂ e Perfil de Velocidade</div>
-      <div class="grid-4">
-        <div class="metric"><span class="metric-value" id="vr-V0">—</span><span class="metric-label">V₀ (m/s)</span></div>
-        <div class="metric"><span class="metric-value" id="vr-S2h">—</span><span class="metric-label">S₂(h_topo)</span></div>
-        <div class="metric"><span class="metric-value" id="vr-Vk">—</span><span class="metric-label">Vk(h_topo) (m/s)</span></div>
-        <div class="metric"><span class="metric-value" id="vr-q">—</span><span class="metric-label">q(h_topo) (N/m²)</span></div>
-      </div>
-    </div>
-    <div class="grid-2">
+    <div class="g4" id="vento-topo-metrics" style="margin-bottom:14px"></div>
+    <div class="g2">
       <div class="card">
-        <div class="card-title"><div class="dot"></div>Direção X — Forças por Andar</div>
-        <table class="tbl"><thead><tr><th>Andar</th><th>z (m)</th><th>S₂</th><th>Vk (m/s)</th><th>q (N/m²)</th><th>Fw_X (kN)</th><th>ΣFw_X (kN)</th></tr></thead>
-        <tbody id="tbody-ventox"></tbody></table>
+        <div class="ctitle"><div class="dot"></div>Direção X — Fw_X por Andar</div>
+        <div style="overflow-x:auto"><table class="tbl">
+          <thead><tr><th>Pav.</th><th>z(m)</th><th>hi(m)</th><th>S₂</th><th>Vk(m/s)</th><th>q(N/m²)</th><th>Fw_X(kN)</th><th>ΣFw_X(kN)</th><th>Hi_X(kN)</th></tr></thead>
+          <tbody id="tbody-vx"></tbody></table></div>
+        <div style="margin-top:8px;font-family:var(--fmono);font-size:11px;color:var(--tx2)" id="vento-tot-x"></div>
       </div>
       <div class="card">
-        <div class="card-title"><div class="dot"></div>Direção Y — Forças por Andar</div>
-        <table class="tbl"><thead><tr><th>Andar</th><th>z (m)</th><th>S₂</th><th>Vk (m/s)</th><th>q (N/m²)</th><th>Fw_Y (kN)</th><th>ΣFw_Y (kN)</th></tr></thead>
-        <tbody id="tbody-ventoy"></tbody></table>
+        <div class="ctitle"><div class="dot"></div>Direção Y — Fw_Y por Andar</div>
+        <div style="overflow-x:auto"><table class="tbl">
+          <thead><tr><th>Pav.</th><th>z(m)</th><th>hi(m)</th><th>S₂</th><th>Vk(m/s)</th><th>q(N/m²)</th><th>Fw_Y(kN)</th><th>ΣFw_Y(kN)</th><th>Hi_Y(kN)</th></tr></thead>
+          <tbody id="tbody-vy"></tbody></table></div>
+        <div style="margin-top:8px;font-family:var(--fmono);font-size:11px;color:var(--tx2)" id="vento-tot-y"></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Diagrama — Força de Vento por Andar</div>
-      <canvas id="chartVento" height="300" style="display:block;width:100%;max-width:700px;margin:0 auto"></canvas>
+      <div class="ctitle"><div class="dot"></div>Desaprumo — Imperfeições Geométricas (NBR 6118 §11.3 / CEB/90)</div>
+      <div class="formula">αa = 1/(100·√H) ≥ 1/200           αn = √((1+1/n)/2)    (n = n.º pilares no pórtico)
+Hi = αa · αn · Fvi    [kN por pórtico]    Fvi = carga vertical total no andar i</div>
+      <div id="desaprumo-res"></div>
+    </div>
+    <div class="card">
+      <div class="ctitle"><div class="dot"></div>Repartição — Diafragma Rígido (processo simplificado)</div>
+      <div class="alert alert-i">ℹ️ Válido quando contraventamento é formado pelo mesmo tipo de elemento (só pórticos). Força proporcional à rigidez K = 3·EI_eq/H³. Torção devida à excentricidade ex=±0,075·Lx, ey=±0,075·Ly (NBR 6123).</div>
+      <div id="repart-cr" class="g4" style="margin-bottom:12px"></div>
+      <div style="overflow-x:auto"><table class="tbl">
+        <thead><tr><th>Pilar</th><th>x(m)</th><th>y(m)</th><th>Kx(kN/m)</th><th>Ky(kN/m)</th><th>xi-xCR</th><th>yi-yCR</th><th>F_X no topo(kN)</th><th>F_Y no topo(kN)</th></tr></thead>
+        <tbody id="tbody-repart"></tbody></table></div>
+    </div>
+    <div class="card">
+      <div class="ctitle"><div class="dot"></div>Diagrama — Força de Vento por Pavimento</div>
+      <canvas id="cvs-vento" height="250" style="width:100%;display:block;border-radius:6px"></canvas>
     </div>
   </div>
 </div>
 
-<!-- PAGE: ALPHA -->
+<!-- ─────── PAGE: ALPHA ─────── -->
 <div class="page" id="p-alpha">
-  <div class="page-header">
-    <div class="page-title">Etapa 4 — Parâmetros α e γZ</div>
-    <div class="page-subtitle"><span class="tag">TRABALHO 1</span> Classificação da estrutura — nós fixos ou móveis — NBR 6118 §15.5</div>
+  <div class="ph">
+    <div class="ph-title">Etapa 4 — Parâmetros α e γZ</div>
+    <div class="ph-sub"><span class="tag">TRABALHO 1</span> Classificação da estrutura — NBR 6118 §15.5</div>
   </div>
-  <div class="alert alert-warn">⚠️ O Trabalho 1 exige que a estrutura seja de <strong>nós fixos (0,6 &lt; α ≤ 1,0)</strong>. Se α &gt; 1,0, retornar ao lançamento e redimensionar.</div>
-
+  <div class="alert alert-w">⚠️ O T1 exige <strong>nós fixos (0,6 &lt; α ≤ 1,0)</strong>. Se α &gt; 1,0 → aumentar rigidez dos pilares.</div>
   <div class="tabs">
-    <div class="tab active" onclick="switchTab('talpha-a',this)">Parâmetro α</div>
-    <div class="tab" onclick="switchTab('talpha-gz',this)">Coeficiente γZ</div>
+    <div class="tab active" onclick="switchTab('ta-alpha',this)">Parâmetro α</div>
+    <div class="tab" onclick="switchTab('ta-gz',this)">Coeficiente γZ</div>
   </div>
-
-  <div class="tab-panel active" id="talpha-a">
+  <div class="tp active" id="ta-alpha">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Parâmetro de Instabilidade α — NBR 6118 §15.5.2</div>
+      <div class="ctitle"><div class="dot"></div>Parâmetro de Instabilidade α — NBR 6118 §15.5.2</div>
       <div class="formula">α = H · √(Nk / (Ecs · Σ Ic))
+H    = altura total (m)            Nk  = soma das cargas verticais (kN)
+Ecs  = 0,85·Eci  (kN/m²)          Eci = 5600·√fck  (MPa) → × 1000 (kN/m²)
+Ic   = momento de inércia dos pilares na direção analisada  [m⁴]
 
-H   = altura total da edificação (m)
-Nk  = somatório das cargas verticais características (kN)
-Ecs = módulo de elasticidade secante = 0,85 · Eci     (kN/m²)
-Eci = 5600 · √fck  (MPa)  →  Eci = 5600000 · √fck  (kN/m²)
-Ic  = somatório dos momentos de inércia dos pilares na direção analisada
-
-Classificação:
-  α ≤ 0,6        →  Estrutura de Pequena Esbeltez
-  0,6 &lt; α ≤ 1,0  →  Estrutura de Nós Fixos  ← OBJETIVO DO T1
-  α &gt; 1,0        →  Estrutura de Nós Móveis (refazer o lançamento!)</div>
-
-      <div class="grid-2">
+Classificação:   α ≤ 0,6 → pequena esbeltez
+                 0,6 &lt; α ≤ 1,0 → NÓSANOS FIXOS ← OBJETIVO DO T1
+                 α &gt; 1,0 → nós móveis (refazer lançamento!)</div>
+      <div class="g2">
         <div>
-          <div class="form-group"><label>H — Altura total (m)</label><input type="number" id="al-H" value="12.0" step="0.5"></div>
-          <div class="form-group"><label>Nk — Somatório cargas vert. (kN)</label><input type="number" id="al-Nk" value="2000" step="100"></div>
-          <div class="form-group"><label>fck (MPa)</label><input type="number" id="al-fck" value="25" step="5"></div>
-          <div class="form-group"><label>ΣIc_x — Soma inércia dir. X (m⁴)</label><input type="number" id="al-Icx" value="0.003" step="0.0001"></div>
-          <div class="form-group"><label>ΣIc_y — Soma inércia dir. Y (m⁴)</label><input type="number" id="al-Icy" value="0.002" step="0.0001"></div>
+          <div class="fg"><label>H — Altura total (m) <small style="color:var(--tx3)">(auto do lançamento)</small></label>
+            <input type="number" id="al-H" value="12.0" step="0.5" oninput="calcAlpha()"></div>
+          <div class="fg"><label>Nk — Somatório cargas vert. (kN)</label>
+            <input type="number" id="al-Nk" value="2000" step="100" oninput="calcAlpha()"></div>
+          <div class="fg"><label>fck (MPa)</label>
+            <input type="number" id="al-fck" value="25" step="5" oninput="calcAlpha()"></div>
+          <div class="fg"><label>ΣIc_x — Inércia dir. X (m⁴) <small style="color:var(--tx3)">(auto dos pilares)</small></label>
+            <input type="number" id="al-Icx" value="0.003" step="0.0001" oninput="calcAlpha()"></div>
+          <div class="fg"><label>ΣIc_y — Inércia dir. Y (m⁴)</label>
+            <input type="number" id="al-Icy" value="0.002" step="0.0001" oninput="calcAlpha()"></div>
         </div>
-        <div>
-          <div class="result-box">
-            <span class="result-label">Cálculo intermediário</span><br>
-            <span style="color:var(--text2);font-size:12px">Eci = 5600·√fck [MPa]</span><br>
-            <span class="result-value" id="al-Eci">—</span><br>
-            <span style="color:var(--text2);font-size:11px">Ecs = 0,85·Eci</span><br>
-            <span id="al-Ecs" style="color:var(--text);font-family:var(--font-mono)">—</span>
-          </div>
-        </div>
+        <div id="alpha-interm"></div>
       </div>
-      <div class="btn-row"><button class="btn btn-primary" onclick="calcAlpha()">Calcular α nas Duas Direções</button></div>
-
-      <div id="div-alpha-res" style="display:none;margin-top:20px">
-        <div class="grid-2">
-          <div class="card" style="margin:0">
-            <div class="section-title">Direção X</div>
-            <div class="metric" style="margin-bottom:12px"><span class="metric-value" id="al-ax">—</span><span class="metric-label">α_x</span></div>
-            <div id="al-ax-class"></div>
-          </div>
-          <div class="card" style="margin:0">
-            <div class="section-title">Direção Y</div>
-            <div class="metric" style="margin-bottom:12px"><span class="metric-value" id="al-ay">—</span><span class="metric-label">α_y</span></div>
-            <div id="al-ay-class"></div>
-          </div>
-        </div>
-        <div id="al-conclusao" style="margin-top:16px"></div>
+      <div class="btns"><button class="btn btn-p" onclick="calcAlpha()">⚙ Calcular α nas Duas Direções</button></div>
+      <div id="div-alpha-res" style="display:none;margin-top:16px">
+        <div class="g2" id="alpha-results"></div>
+        <div id="alpha-conclusao" style="margin-top:12px"></div>
       </div>
     </div>
   </div>
-
-  <div class="tab-panel" id="talpha-gz">
+  <div class="tp" id="ta-gz">
     <div class="card">
-      <div class="card-title"><div class="dot"></div>Coeficiente γZ — NBR 6118 §15.5.3</div>
-      <div class="formula">γZ = 1 / (1 - ΔM_tot/M_1,tot)
+      <div class="ctitle"><div class="dot"></div>Coeficiente γZ — NBR 6118 §15.5.3</div>
+      <div class="formula">γZ = 1 / (1 - ΔM_tot / M₁_tot)
 
-Onde:
-  M_1,tot  = somatório dos momentos de 1ª ordem no pé de cada pilar
-  ΔM_tot   = somatório dos momentos de 2ª ordem global = Σ(Pk · δk)
-  Pk       = carga vertical no pavimento k
-  δk       = deslocamento horizontal (deriva) do pavimento k
+Método incremental por pavimento (Araújo, 2014):
+  M₁_tot = Σ [ΣFw_i · h_i]    (momentos de 1ª ordem das forças horizontais)
+  ΔM_tot  = Σ [Nd_k · Δk]     (momentos adicionais = carga × deslocamento)
+  Δk      = deslocamento horizontal do pavimento k (cm → m)
 
-Método prático (análise linear elástica):
-  Calcular M_1,tot = Σ(Fw_i · h_i)   (momento das forças de vento)
-  Calcular ΔM_tot  = Σ(Nd_i · Δi)    (cargas × deslocamento)
-  δk ≈ Fw·h³/(3·EI)  (pilar em balanço, estimativa)
-
-Validade: γZ ≤ 1,3   (se γZ &gt; 1,3 → análise rigorosa de 2ª ordem)
-Majoração: F_2ª_ordem = γZ · F_1ª_ordem</div>
-
-      <div class="alert alert-info">ℹ️ Para o cálculo de γZ, insira os momentos de 1ª ordem e os momentos adicionais por pavimento. Use os deslocamentos obtidos em análise estrutural (ou estimativa de balanço).</div>
-
-      <div class="grid-2">
-        <div class="form-group"><label>M₁_tot — Momento total 1ª ordem (kN·m)</label><input type="number" id="gz-M1" value="500" step="10"></div>
-        <div class="form-group"><label>ΔM_tot — Momento adicional 2ª ordem (kN·m)</label><input type="number" id="gz-dM" value="80" step="1"></div>
-      </div>
-      <div class="btn-row"><button class="btn btn-primary" onclick="calcGZ()">Calcular γZ</button></div>
-      <div id="div-gz-res" style="display:none;margin-top:16px">
-        <div class="grid-4">
-          <div class="metric"><span class="metric-value" id="gz-val">—</span><span class="metric-label">γZ</span></div>
-          <div class="metric"><span class="metric-value" id="gz-M1v">—</span><span class="metric-label">M₁_tot (kN·m)</span></div>
-          <div class="metric"><span class="metric-value" id="gz-dMv">—</span><span class="metric-label">ΔM_tot (kN·m)</span></div>
-          <div class="metric"><span class="metric-value" id="gz-rat">—</span><span class="metric-label">ΔM/M₁ (%)</span></div>
-        </div>
-        <div id="gz-class" style="margin-top:12px"></div>
-      </div>
-    </div>
-
-    <!-- TABELA γZ por direção -->
-    <div class="card">
-      <div class="card-title"><div class="dot"></div>Cálculo de γZ por Pavimento</div>
-      <div class="alert alert-info" style="margin-bottom:16px">ℹ️ Insira a força de vento acumulada e a força vertical por pavimento para calcular M₁_tot e ΔM_tot incrementalmente.</div>
-      <div class="grid-2">
+γZ ≤ 1,10 → dispensar majoração     γZ ≤ 1,30 → nós fixos OK
+γZ &gt; 1,30 → análise rigorosa de 2ª ordem necessária</div>
+      <div class="alert alert-i">ℹ️ Os campos Fw são preenchidos automaticamente do cálculo de vento. Insira os deslocamentos Δk obtidos da análise estrutural (ou estimativa de balanço).</div>
+      <div class="g2">
         <div>
-          <div class="section-title">Direção X</div>
-          <table class="tbl">
-            <thead><tr><th>Pav.</th><th>z (m)</th><th>Nd_k (kN)</th><th>Fw_X_k (kN)</th><th>Δk_X (cm)</th></tr></thead>
-            <tbody id="tbody-gzx"></tbody>
-          </table>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:8px;font-family:var(--fmono)">Direção X</div>
+          <div style="overflow-x:auto"><table class="tbl">
+            <thead><tr><th>Pav.</th><th>z(m)</th><th>Nd_k(kN)</th><th>Fw_X_k(kN)</th><th>Δk_X(cm)</th></tr></thead>
+            <tbody id="tbody-gzx"></tbody></table></div>
+          <div id="gz-res-x" style="margin-top:10px"></div>
         </div>
         <div>
-          <div class="section-title">Direção Y</div>
-          <table class="tbl">
-            <thead><tr><th>Pav.</th><th>z (m)</th><th>Nd_k (kN)</th><th>Fw_Y_k (kN)</th><th>Δk_Y (cm)</th></tr></thead>
-            <tbody id="tbody-gzy"></tbody>
-          </table>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:8px;font-family:var(--fmono)">Direção Y</div>
+          <div style="overflow-x:auto"><table class="tbl">
+            <thead><tr><th>Pav.</th><th>z(m)</th><th>Nd_k(kN)</th><th>Fw_Y_k(kN)</th><th>Δk_Y(cm)</th></tr></thead>
+            <tbody id="tbody-gzy"></tbody></table></div>
+          <div id="gz-res-y" style="margin-top:10px"></div>
         </div>
       </div>
-      <div class="btn-row">
-        <button class="btn btn-secondary" onclick="gerarTabelaGZ()">Gerar Tabela dos Pavimentos</button>
-        <button class="btn btn-primary" onclick="calcGZtabela()">Calcular γZ pelas Tabelas</button>
-      </div>
-      <div id="div-gztab-res" style="display:none;margin-top:16px">
-        <div class="grid-2">
-          <div class="card" style="margin:0"><div class="section-title">Direção X</div>
-            <div class="metric"><span class="metric-value" id="gztx-val">—</span><span class="metric-label">γZ_x</span></div>
-            <div id="gztx-class" style="margin-top:8px"></div></div>
-          <div class="card" style="margin:0"><div class="section-title">Direção Y</div>
-            <div class="metric"><span class="metric-value" id="gzty-val">—</span><span class="metric-label">γZ_y</span></div>
-            <div id="gzty-class" style="margin-top:8px"></div></div>
-        </div>
+      <div class="btns">
+        <button class="btn btn-s" onclick="buildGZtable()">↻ Atualizar Tabela dos Pavimentos</button>
+        <button class="btn btn-p" onclick="calcGZ()">⚙ Calcular γZ</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PAGE: ELU (placeholder) -->
-<div class="page" id="p-elu">
-  <div class="page-header"><div class="page-title">Etapa 5 — ELU</div><div class="page-subtitle"><span class="tag">EM BREVE</span></div></div>
-  <div class="alert alert-info">🔧 Esta etapa será liberada na próxima versão do software (Trabalho 2).</div>
-</div>
-<div class="page" id="p-els">
-  <div class="page-header"><div class="page-title">Etapa 6 — ELS</div><div class="page-subtitle"><span class="tag">EM BREVE</span></div></div>
-  <div class="alert alert-info">🔧 Esta etapa será liberada na próxima versão do software.</div>
-</div>
-<div class="page" id="p-det">
-  <div class="page-header"><div class="page-title">Etapa 7 — Detalhamento</div><div class="page-subtitle"><span class="tag">EM BREVE</span></div></div>
-  <div class="alert alert-info">🔧 Esta etapa abrangerá fôrmas e detalhamento de armaduras.</div>
-</div>
-
-<!-- PAGE: RELATÓRIO -->
-<div class="page" id="p-relatorio">
-  <div class="page-header"><div class="page-title">Relatório — Trabalho 1</div><div class="page-subtitle"><span class="tag">RELATÓRIO</span> Resumo consolidado dos cálculos</div></div>
-  <div class="alert alert-info">ℹ️ O relatório compila todos os resultados inseridos. Use o botão abaixo para imprimir ou exportar como PDF.</div>
-  <div class="btn-row"><button class="btn btn-primary" onclick="window.print()">🖨️ Imprimir / Exportar PDF</button></div>
-  <div id="div-relatorio" style="margin-top:20px"></div>
+<!-- ─────── PAGE: RELATÓRIO ─────── -->
+<div class="page" id="p-rel">
+  <div class="ph">
+    <div class="ph-title">Relatório — Trabalho 1</div>
+    <div class="ph-sub"><span class="tag">RELATÓRIO</span> Resumo consolidado dos cálculos</div>
+  </div>
+  <div class="alert alert-i">ℹ️ O relatório compila todos os resultados. Use o botão para exportar como PDF.</div>
+  <div class="btns">
+    <button class="btn btn-p" onclick="window.print()">🖨️ Imprimir / Exportar PDF</button>
+    <button class="btn btn-s" onclick="gerarRelatorio()">↻ Atualizar Relatório</button>
+  </div>
+  <div id="div-relatorio" style="margin-top:18px"></div>
 </div>
 
 </main>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ===== NAVIGATION =====
-function showPage(id, el) {
+/* ═══════════════════════════════════════════════════════════
+   CONSTANTES NBR 6123 — VALIDADAS contra exemplo do
+   Prof. José Milton de Araújo (FURG, 2014)
+═══════════════════════════════════════════════════════════ */
+const CAT_PARAMS = {
+  I:   {b:1.10, Fr:1.00, p:0.060},
+  II:  {b:1.00, Fr:1.00, p:0.085},
+  III: {b:0.94, Fr:1.00, p:0.100},
+  IV:  {b:0.85, Fr:0.98, p:0.125},  // Araújo usa b=0.85, p=0.125 para Cat IV
+  V:   {b:0.74, Fr:0.95, p:0.150},
+};
+const CLS_FR = {A:1.00, B:0.98, C:0.95};
+
+/* ═══ ESTADO ═══ */
+let pilares = [];
+let addingMode = false;
+let pendingPos = null;
+let dragIdx = -1;
+let selectedIdx = -1;
+let ventResult = {x:[], y:[], cumX:0, cumY:0, M1x:0, M1y:0};
+
+/* ═══ HELPERS ═══ */
+const gel = id => document.getElementById(id);
+const gv  = id => parseFloat(gel(id)?.value) || 0;
+const gi  = id => parseInt(gel(id)?.value)   || 0;
+const gs  = id => gel(id)?.value || '';
+const fmt = (v,d=2) => isNaN(v) ? '—' : (+v).toFixed(d);
+
+function S2(z, cat, cls) {
+  const c = CAT_PARAMS[cat] || CAT_PARAMS.III;
+  const Fr = CLS_FR[cls] || 1.0;
+  return c.b * Fr * Math.pow(Math.max(z, 1) / 10, c.p);
+}
+
+/* ═══ NAVEGAÇÃO ═══ */
+function nav(pageId, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
-  if(el) el.classList.add('active');
-  calcGeom();
-  if(id==='p-relatorio') gerarRelatorio();
+  document.querySelectorAll('.sbar-item').forEach(s => s.classList.remove('active'));
+  const pg = gel(pageId);
+  if (pg) { pg.classList.add('active'); pg.classList.add('fade-up'); }
+  if (el) el.classList.add('active');
+  if (pageId === 'p-rel') gerarRelatorio();
+  if (pageId === 'p-planta') drawCanvas();
+  updateHdr();
 }
 
 function switchTab(id, el) {
-  const panel = document.getElementById(id);
-  if(!panel) return;
+  const panel = gel(id);
+  if (!panel) return;
   const parent = panel.parentElement;
-  parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  parent.querySelectorAll('.tp').forEach(p => p.classList.remove('active'));
+  parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   panel.classList.add('active');
-  if(el) {
-    const tabs = el.parentElement;
-    tabs.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-  }
+  if (el) el.classList.add('active');
+  if (id === 'tl-planta') drawCanvas();
 }
 
-// ===== GEOMETRY =====
+/* ═══ HEADER ═══ */
+function updateHdr() {
+  const cidade = gs('d-cidade') || '—';
+  const n = gi('l-npav');
+  const H = calcH();
+  gel('hdr-info').textContent = `${cidade} | ${n} pav. | H=${fmt(H)}m`;
+}
+
+/* ═══ GEOMETRIA ═══ */
+function calcH() {
+  const n = gi('l-npav') || 4;
+  const ped = gv('l-ped') || 3.0;
+  const ped1 = gv('l-ped1') || 3.0;
+  const cob = gs('l-cob') === '1';
+  return ped1 + (n - 1) * ped + (cob ? ped : 0);
+}
+
 function calcGeom() {
-  const npav = parseInt(document.getElementById('l-npav')?.value||4);
-  const ped = parseFloat(document.getElementById('l-ped')?.value||3);
-  const Lx = parseFloat(document.getElementById('l-Lx')?.value||12);
-  const Ly = parseFloat(document.getElementById('l-Ly')?.value||8);
-  const cob = parseInt(document.getElementById('l-cob')?.value||1);
-  const totalPav = npav + cob;
-  const H = totalPav * ped;
-  const Apav = Lx * Ly;
-  const rH = document.getElementById('res-H');
-  const rA = document.getElementById('res-Apav');
-  if(rH) rH.textContent = H.toFixed(1)+' m';
-  if(rA) rA.textContent = Apav.toFixed(1)+' m²';
-  gerarTabelaPavs(npav, ped, cob);
-  drawFront(npav, cob, ped, Lx, Ly);
-  drawPlant(Lx, Ly);
-}
+  const n  = gi('l-npav') || 4;
+  const ped = gv('l-ped') || 3.0;
+  const ped1 = gv('l-ped1') || 3.0;
+  const cob  = gs('l-cob') === '1';
+  const Lx = gv('l-Lx') || 12;
+  const Ly = gv('l-Ly') || 8;
+  const H = calcH();
 
-function gerarTabelaPavs(npav, ped, cob) {
-  const tbody = document.getElementById('tbody-pavs');
-  if(!tbody) return;
-  let html = '';
+  gel('res-H').textContent = fmt(H) + ' m';
+  gel('res-Apav').textContent = fmt(Lx * Ly) + ' m²';
+
+  const rows = [];
   let z = 0;
-  for(let i = 0; i < npav; i++) {
-    z += ped;
-    const desc = i===0 ? 'Pav. Térreo' : i===npav-1 ? 'Último Pav. Tipo' : `${i+1}º Pavimento`;
-    html += `<tr><td>${i+1}</td><td>${desc}</td><td>${z.toFixed(1)}</td><td>${ped.toFixed(1)}</td></tr>`;
+  for (let i = 1; i <= n; i++) {
+    const hi = i === 1 ? ped1 : ped;
+    z += hi;
+    rows.push(`<tr><td>${i}</td><td>Pav. Tipo ${i}</td><td>${fmt(z)} m</td><td>${fmt(hi)} m</td></tr>`);
   }
-  if(cob) {
-    z += ped;
-    html += `<tr><td>${npav+1}</td><td>Cobertura</td><td>${z.toFixed(1)}</td><td>${ped.toFixed(1)}</td></tr>`;
-  }
-  tbody.innerHTML = html;
+  if (cob) { z += ped; rows.push(`<tr><td>${n+1}</td><td>Cobertura</td><td>${fmt(z)} m</td><td>${fmt(ped)} m</td></tr>`); }
+  gel('tbody-pavs').innerHTML = rows.join('');
 }
 
-function drawFront(npav, cob, ped, Lx, Ly) {
-  const c = document.getElementById('cFront');
-  if(!c) return;
-  const ctx = c.getContext('2d');
-  const W = c.width, H = c.height;
-  ctx.clearRect(0,0,W,H);
-  const totalPav = npav + cob;
-  const margin = 30, base = H-20;
-  const bW = W - margin*2;
-  const bH = H - 40;
-  const flH = bH / (totalPav+0.5);
-  ctx.strokeStyle = '#e8c547';
-  ctx.lineWidth = 1;
-  ctx.fillStyle = 'rgba(232,197,71,0.07)';
-  for(let i = 0; i < totalPav; i++) {
-    const y = base - (i+1)*flH;
-    ctx.fillRect(margin, y, bW, flH);
-    ctx.strokeRect(margin, y, bW, flH);
-    ctx.fillStyle = '#9aa0af';
-    ctx.font = '10px IBM Plex Mono';
-    ctx.fillText(i===0?'T':`${i+1}`, margin+6, y+flH/2+4);
-    ctx.fillStyle = 'rgba(232,197,71,0.07)';
-  }
-  // pillars
-  const pilW = 6;
-  ctx.fillStyle = 'rgba(232,197,71,0.4)';
-  ctx.fillRect(margin, base-totalPav*flH, pilW, totalPav*flH);
-  ctx.fillRect(margin+bW-pilW, base-totalPav*flH, pilW, totalPav*flH);
-  // ground
-  ctx.strokeStyle = '#626878'; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(margin-10, base); ctx.lineTo(W-margin+10, base); ctx.stroke();
-  ctx.fillStyle = '#9aa0af';
-  ctx.font = '10px IBM Plex Mono';
-  ctx.fillText(`H=${(totalPav*ped).toFixed(1)}m`, margin+bW+4, base-totalPav*flH/2);
-  ctx.fillText(`Lx=${Lx}m`, margin, H-5);
+/* ═══ TURBULÊNCIA ═══ */
+function setTurb() {
+  const t = gs('d-turb');
+  if (t === 'low')  { gel('d-cax').value = 1.33; gel('d-cay').value = 1.10; }
+  if (t === 'high') { gel('d-cax').value = 1.60; gel('d-cay').value = 1.30; }
+  recalcAll();
 }
 
-function drawPlant(Lx, Ly) {
-  const c = document.getElementById('cPlant');
-  if(!c) return;
-  const ctx = c.getContext('2d');
-  const W = c.width, H = c.height;
-  ctx.clearRect(0,0,W,H);
-  const margin = 30;
-  const scaleX = (W-margin*2)/Lx, scaleY = (H-margin*2)/Ly;
-  const scale = Math.min(scaleX, scaleY);
-  const pW = Lx*scale, pH = Ly*scale;
-  const ox = (W-pW)/2, oy = (H-pH)/2;
-  ctx.fillStyle = 'rgba(232,197,71,0.06)';
-  ctx.strokeStyle = '#e8c547';
-  ctx.lineWidth = 1;
-  ctx.fillRect(ox,oy,pW,pH);
-  ctx.strokeRect(ox,oy,pW,pH);
-  const pSize = 8;
-  ctx.fillStyle = 'rgba(232,197,71,0.5)';
-  [[0,0],[1,0],[0,1],[1,1]].forEach(([px,py]) => {
-    ctx.fillRect(ox+px*pW-pSize/2, oy+py*pH-pSize/2, pSize, pSize);
-  });
-  // dims
-  ctx.fillStyle = '#9aa0af'; ctx.font = '10px IBM Plex Mono';
-  ctx.fillText(`Lx=${Lx}m`, ox+pW/2-20, oy+pH+16);
-  ctx.save(); ctx.translate(ox-16, oy+pH/2); ctx.rotate(-Math.PI/2);
-  ctx.fillText(`Ly=${Ly}m`, -15, 0); ctx.restore();
-  // arrows
-  ctx.strokeStyle = '#626878'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(ox+pW/2,oy-20); ctx.lineTo(ox+pW/2,oy-5); ctx.stroke();
-  ctx.fillStyle = '#60a5fa'; ctx.font = '9px IBM Plex Mono';
-  ctx.fillText('N',ox+pW/2-3,oy-22);
-}
-
-// ===== PRÉ-DIMENSIONAMENTO =====
+/* ═══ PRÉ-DIM ═══ */
 function calcPredim() {
-  const vv = parseFloat(document.getElementById('pd-vv')?.value||4);
-  const tv = parseInt(document.getElementById('pd-tviga')?.value||12);
-  const vl = parseFloat(document.getElementById('pd-vl')?.value||4);
-  const tl = parseInt(document.getElementById('pd-tlaje')?.value||40);
-  const Nd = parseFloat(document.getElementById('pd-Nd')?.value||500);
-  const fck = parseFloat(document.getElementById('pd-fck')?.value||25);
-  const hv = (vv/tv).toFixed(2);
-  const hl = (vl/tl*100).toFixed(1);
-  const fcd = fck/1.4;
-  const Ac = (Nd/(0.85*fcd*10))*1e4; // cm²
-  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  set('pd-hv', hv+' m');
-  set('pd-hl', hl+' cm');
-  set('pd-Ac', Ac.toFixed(1)+' cm²');
+  const vv = gv('pd-vv') || 4; const tv = gi('pd-tv') || 12;
+  const vl = gv('pd-vl') || 4; const tl = gi('pd-tl') || 40;
+  const Nd = gv('pd-Nd') || 500;
+  const fck = gv('d-fck') || 25;
+
+  const hv_cm = (vv / tv) * 100;
+  gel('pd-viga-res').innerHTML = `<div class="metric-v">${fmt(hv_cm,0)} cm</div><div class="metric-l">h_viga mín. | b ≥ ${fmt(hv_cm/3,0)} cm</div>`;
+
+  const hl = Math.max(vl / tl, 0.07) * 100;
+  gel('pd-laje-res').innerHTML = `<div class="metric-v">${fmt(hl,0)} cm</div><div class="metric-l">h_laje mín.</div>`;
+
+  const fcd = fck / 1.4; const fyd = 500 / 1.15; const rho = 0.004;
+  const Ac = Nd / (0.85 * fcd / 10 + rho * fyd / 10);
+  gel('pd-pilar-res').innerHTML = `<div class="metric-v">${fmt(Ac,0)} cm²</div><div class="metric-l">Ac mín. pilar</div>`;
 }
 
-// ===== PILARES =====
-let pilares = [];
-function addPilar() {
-  const n = pilares.length+1;
-  pilares.push({id:'P'+n, bx:0.20, hy:0.40, by:0.20, hx:0.40, Nd:500});
-  renderPilares();
-}
-function removePilar(i) { pilares.splice(i,1); renderPilares(); }
-function renderPilares() {
-  const tbody = document.getElementById('tbody-pilares');
-  if(!tbody) return;
-  let html = '';
-  pilares.forEach((p,i) => {
-    const Ix = (p.bx * Math.pow(p.hy,3) / 12).toExponential(3);
-    const Iy = (p.by * Math.pow(p.hx,3) / 12).toExponential(3);
-    html += `<tr>
-      <td>${i+1}</td>
-      <td><input type="text" value="${p.id}" style="width:50px" oninput="pilares[${i}].id=this.value"></td>
-      <td><input type="number" value="${p.bx}" step="0.05" style="width:65px" oninput="pilares[${i}].bx=+this.value;renderPilares()"></td>
-      <td><input type="number" value="${p.hy}" step="0.05" style="width:65px" oninput="pilares[${i}].hy=+this.value;renderPilares()"></td>
-      <td><input type="number" value="${p.by}" step="0.05" style="width:65px" oninput="pilares[${i}].by=+this.value;renderPilares()"></td>
-      <td><input type="number" value="${p.hx}" step="0.05" style="width:65px" oninput="pilares[${i}].hx=+this.value;renderPilares()"></td>
-      <td style="color:var(--text2)">${Ix}</td>
-      <td style="color:var(--text2)">${Iy}</td>
-      <td><input type="number" value="${p.Nd}" step="50" style="width:70px" oninput="pilares[${i}].Nd=+this.value"></td>
-      <td><button class="btn btn-danger" onclick="removePilar(${i})">✕</button></td>
-    </tr>`;
-  });
-  tbody.innerHTML = html || '<tr><td colspan="10" style="color:var(--text3);text-align:center">Nenhum pilar. Clique em "+ Pilar".</td></tr>';
-}
-function calcEI() {
-  if(!pilares.length) return;
-  const fck = parseFloat(document.getElementById('al-fck')?.value||25);
-  const Eci = 5600 * Math.sqrt(fck) * 1000; // kN/m²
-  const Ecs = 0.85 * Eci;
-  let SIx=0, SIy=0, SNd=0;
-  pilares.forEach(p => {
-    SIx += p.bx * Math.pow(p.hy,3)/12;
-    SIy += p.by * Math.pow(p.hx,3)/12;
-    SNd += p.Nd;
-  });
-  const EIx = Ecs * SIx, EIy = Ecs * SIy;
-  document.getElementById('m-EIx').textContent = EIx.toExponential(3);
-  document.getElementById('m-EIy').textContent = EIy.toExponential(3);
-  document.getElementById('m-nPil').textContent = pilares.length;
-  document.getElementById('m-sumNd').textContent = SNd.toFixed(0);
-  document.getElementById('div-EI').style.display='block';
-  // auto-fill alpha page
-  const sumIx = document.getElementById('al-Icx');
-  const sumIy = document.getElementById('al-Icy');
-  if(sumIx) sumIx.value = SIx.toFixed(6);
-  if(sumIy) sumIy.value = SIy.toFixed(6);
-  const nkEl = document.getElementById('al-Nk');
-  if(nkEl) nkEl.value = SNd.toFixed(0);
-}
-
-// VIGAS
-let vigas = [];
-function addViga() {
-  const n = vigas.length+1;
-  vigas.push({id:'V'+n, L:4.0, b:0.20, h:0.40, tipo:'Contínua'});
-  renderVigas();
-}
-function renderVigas() {
-  const tbody = document.getElementById('tbody-vigas');
-  if(!tbody) return;
-  let html='';
-  vigas.forEach((v,i) => {
-    html+=`<tr>
-      <td>${i+1}</td>
-      <td><input type="text" value="${v.id}" style="width:50px" oninput="vigas[${i}].id=this.value"></td>
-      <td><input type="number" value="${v.L}" step="0.5" style="width:65px" oninput="vigas[${i}].L=+this.value"></td>
-      <td><input type="number" value="${v.b}" step="0.05" style="width:65px" oninput="vigas[${i}].b=+this.value"></td>
-      <td><input type="number" value="${v.h}" step="0.05" style="width:65px" oninput="vigas[${i}].h=+this.value"></td>
-      <td><select style="width:90px" oninput="vigas[${i}].tipo=this.value"><option>Contínua</option><option>Biapoiada</option></select></td>
-      <td><button class="btn btn-danger" onclick="vigas.splice(${i},1);renderVigas()">✕</button></td>
-    </tr>`;
-  });
-  tbody.innerHTML = html || '<tr><td colspan="7" style="color:var(--text3);text-align:center">Nenhuma viga.</td></tr>';
-}
-
-// LAJES
-let lajes = [];
-function addLaje() {
-  const n = lajes.length+1;
-  lajes.push({id:'L'+n, lx:4.0, ly:5.0, h:12, tipo:'Maciça'});
-  renderLajes();
-}
-function renderLajes() {
-  const tbody = document.getElementById('tbody-lajes');
-  if(!tbody) return;
-  let html='';
-  lajes.forEach((l,i) => {
-    const lam = (l.ly/l.lx).toFixed(2);
-    html+=`<tr>
-      <td>${i+1}</td>
-      <td><input type="text" value="${l.id}" style="width:50px" oninput="lajes[${i}].id=this.value"></td>
-      <td><input type="number" value="${l.lx}" step="0.5" style="width:65px" oninput="lajes[${i}].lx=+this.value;renderLajes()"></td>
-      <td><input type="number" value="${l.ly}" step="0.5" style="width:65px" oninput="lajes[${i}].ly=+this.value;renderLajes()"></td>
-      <td><input type="number" value="${l.h}" step="1" style="width:60px" oninput="lajes[${i}].h=+this.value"></td>
-      <td style="color:${parseFloat(lam)>=2?'var(--orange)':'var(--text2)'}">${lam}</td>
-      <td><select style="width:90px" oninput="lajes[${i}].tipo=this.value"><option>Maciça</option><option>Nervurada</option><option>Painel</option></select></td>
-      <td><button class="btn btn-danger" onclick="lajes.splice(${i},1);renderLajes()">✕</button></td>
-    </tr>`;
-  });
-  tbody.innerHTML = html || '<tr><td colspan="8" style="color:var(--text3);text-align:center">Nenhuma laje.</td></tr>';
-}
-
-// ===== AÇÕES =====
+/* ═══ AÇÕES ═══ */
 function calcAcoes() {
-  const pp = parseFloat(document.getElementById('a-pplaje')?.value||3);
-  const rev = parseFloat(document.getElementById('a-rev')?.value||1);
-  const alv = parseFloat(document.getElementById('a-alv')?.value||1.5);
-  const imp = parseFloat(document.getElementById('a-imp')?.value||0.5);
-  const g = pp+rev+alv+imp;
-  const el = document.getElementById('res-gk');
-  if(el) el.textContent = g.toFixed(2)+' kN/m²';
+  const g = (gv('a-ppl') || 0) + (gv('a-rev') || 0) + (gv('a-alv') || 0) + (gv('a-imp') || 0);
+  gel('res-gk').innerHTML = `<div class="metric-v">${fmt(g)} kN/m²</div><div class="metric-l">gk total</div>`;
+  gel('sum-gk').textContent = fmt(g) + ' kN/m²';
+  const qk = gv('a-qk') || 1.5;
+  const qkcob = gv('a-qkcob') || 1.0;
+  gel('sum-qk').textContent = fmt(qk) + ' kN/m²';
+  gel('sum-qkcob').textContent = fmt(qkcob) + ' kN/m²';
+  gel('sum-pk').textContent = fmt(g + qk) + ' kN/m²';
 }
 
 function setUsoCarga() {
-  const uso = document.getElementById('a-uso')?.value;
-  const qk = document.getElementById('a-qk');
-  if(qk && uso!=='custom') qk.value = uso;
+  const v = gs('a-uso');
+  if (v !== 'custom') gel('a-qk').value = v;
 }
 
+/* ═══ COMBINAÇÕES ELU ═══ */
 function calcComb() {
-  const g = parseFloat(document.getElementById('c-g')?.value||6);
-  const q = parseFloat(document.getElementById('c-q')?.value||1.5);
-  const fw = parseFloat(document.getElementById('c-fw')?.value||0.5);
-  const c1 = 1.4*g + 1.4*q;
-  const c2 = 1.4*g + 1.4*fw + 1.4*0.5*q;
-  const c3 = 1.4*g + 1.4*q + 1.4*0.6*fw;
-  const max = Math.max(c1,c2,c3);
-  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  set('c1r', c1.toFixed(2));
-  set('c2r', c2.toFixed(2));
-  set('c3r', c3.toFixed(2));
-  const gov = c1>=c2&&c1>=c3?'Combinação 1':c2>=c3?'Combinação 2':'Combinação 3';
-  set('c-gov', gov+' = '+max.toFixed(2)+' kN/m²');
-  document.getElementById('res-comb').style.display='block';
+  const g = gv('c-g'), q = gv('c-q'), fw = gv('c-fw');
+  const c1 = 1.4 * g + 1.4 * 0.5 * q + 1.4 * 0.6 * fw;
+  const c2 = 1.4 * g + 1.4 * 0.5 * q + 1.4 * fw;
+  const c3 = 1.4 * g + 1.4 * q + 1.4 * 0.6 * fw;
+  const govIdx = [c1,c2,c3].indexOf(Math.max(c1,c2,c3));
+  const labels = ['Comb 1','Comb 2','Comb 3'];
+  gel('res-comb').innerHTML = [c1,c2,c3].map((c,i) =>
+    `<div class="metric" style="border-color:${i===govIdx?'var(--acc)':'var(--bd)'}">
+      <div class="metric-v" style="font-size:16px">${fmt(c)} kN/m²</div>
+      <div class="metric-l">Comb ${i+1} ${i===govIdx?'★':''}</div></div>`
+  ).join('');
+  gel('c-gov').textContent = `${labels[govIdx]} = ${fmt(Math.max(c1,c2,c3))} kN/m²`;
 }
 
-// ===== VENTO =====
-const catParams = {
-  I: {b:1.10, Fr:1.00, p:0.06},
-  II: {b:1.00, Fr:1.00, p:0.085},
-  III: {b:0.94, Fr:1.00, p:0.10},
-  IV: {b:0.86, Fr:0.98, p:0.12},
-  V: {b:0.74, Fr:0.95, p:0.15}
-};
-// S₂ multipliers by class (A, B, C) — NBR 6123 Tab. 1-3
-// Fr corrections by category
-function getS2(z, cat, cls) {
-  const cp = catParams[cat] || catParams.III;
-  // S2 = b * Fr * (z/10)^p, with min z=10m for cat <= II
-  const zef = Math.max(z, 5);
-  return cp.b * cp.Fr * Math.pow(zef/10, cp.p);
-}
-
-let ventoDados = null;
+/* ═══════════════════════════════════════════════════════════
+   VENTO — Validado contra Tabela 6.2.1 (Araújo, 2014)
+   Fórmula: Fw_i = Ca · q(zᵢ) · L_fachada · hᵢ  (eq.6.2.3)
+   S₂ = b·Fr·(z/10)^p   Cat IV: b=0,85 Fr=0,98 p=0,125
+═══════════════════════════════════════════════════════════ */
 function calcVento() {
-  const V0 = parseFloat(document.getElementById('vt-v0')?.value||30);
-  const S1 = parseFloat(document.getElementById('vt-s1')?.value||1);
-  const S3 = parseFloat(document.getElementById('vt-s3')?.value||1);
-  const cat = document.getElementById('vt-cat')?.value||'III';
-  const Ca = parseFloat(document.getElementById('vt-Ca')?.value||1.2);
-  const fy = parseFloat(document.getElementById('vt-fy')?.value||8);
-  const fx = parseFloat(document.getElementById('vt-fx')?.value||12);
-  const npav = parseInt(document.getElementById('vt-npav')?.value||4);
-  const ped = parseFloat(document.getElementById('vt-ped')?.value||3);
+  const V0  = gv('d-v0')  || 30;
+  const S1  = gv('d-s1')  || 1.0;
+  const S3  = gv('d-s3')  || 1.0;
+  const cat = gs('d-cat') || 'III';
+  const cls = gs('d-cls') || 'A';
+  const Ca_x = gv('d-cax') || 1.33;
+  const Ca_y = gv('d-cay') || 1.10;
+  const Lfy  = gv('l-lfy') || gv('l-Ly') || 8;   // largura fachada vento X
+  const Lfx  = gv('l-lfx') || gv('l-Lx') || 12;  // largura fachada vento Y
 
-  const rows = [];
-  let cumX=0, cumY=0;
-  for(let i=1;i<=npav;i++) {
-    const z = i*ped;
-    const S2 = getS2(z, cat, 'A');
-    const Vk = V0*S1*S2*S3;
-    const q = 0.613*Vk*Vk; // N/m²
-    const Ae_X = fy*ped; // m²
-    const Ae_Y = fx*ped;
-    const FwX = Ca*q*Ae_X/1000; // kN
-    const FwY = Ca*q*Ae_Y/1000;
-    cumX+=FwX; cumY+=FwY;
-    rows.push({i,z,S2,Vk,q,FwX,FwY,cumX,cumY});
+  const n    = gi('l-npav') || 4;
+  const ped  = gv('l-ped')  || 3.0;
+  const ped1 = gv('l-ped1') || 3.0;
+  const H    = calcH();
+
+  // Desaprumo — NBR 6118 §11.3 / CEB/90
+  const alpha_a_raw = 1 / (100 * Math.sqrt(H));
+  const alpha_a = Math.max(alpha_a_raw, 1/200);
+  const n_pil = pilares.length || 4;
+  const alpha_n = Math.sqrt((1 + 1/n_pil) / 2);
+
+  const cob = gs('l-cob') === '1';
+  const nTot = n + (cob ? 1 : 0);
+
+  const rX = [], rY = [];
+  let cumX = 0, cumY = 0, M1x = 0, M1y = 0;
+  const Apav = (gv('l-Lx') || 12) * (gv('l-Ly') || 8);
+
+  for (let i = 1; i <= nTot; i++) {
+    const hi  = i === 1 ? ped1 : ped;
+    // z = cota do centro do pavimento (usa cota da laje, como Araújo)
+    const z   = i === 1 ? ped1 : ped1 + (i - 1) * ped;
+    const z_f = z; // cota acima do terreno
+
+    const s2  = S2(z_f, cat, cls);
+    const Vk  = V0 * S1 * s2 * S3;
+    const q   = 0.613 * Vk * Vk;   // N/m²
+
+    // Forças de arrasto (eq. 6.2.3 simplificada)
+    const FwX = Ca_x * (q / 1000) * Lfy * hi;
+    const FwY = Ca_y * (q / 1000) * Lfx * hi;
+    cumX += FwX; cumY += FwY;
+
+    // Momento de 1ª ordem (pilar em balanço, acumulado de cima para baixo)
+    M1x += cumX * ped;
+    M1y += cumY * ped;
+
+    // Carga vertical no pavimento (para desaprumo)
+    const pkPav = ((gv('a-ppl')||3) + (gv('a-rev')||1) + (gv('a-alv')||1.5) + (gv('a-imp')||0.5) + (gv('a-qk')||1.5)) * Apav;
+    const Fvi = pkPav || 2000;
+    const Hi  = alpha_a * alpha_n * Fvi;
+
+    const desc = i <= n ? `Pav. ${i}` : 'Cobertura';
+    rX.push({pav:i, desc, z:fmt(z_f), hi:fmt(hi), s2:fmt(s2,4), Vk:fmt(Vk), q:fmt(q,1), Fw:fmt(FwX), cum:fmt(cumX), Hi:fmt(Hi)});
+    rY.push({pav:i, desc, z:fmt(z_f), hi:fmt(hi), s2:fmt(s2,4), Vk:fmt(Vk), q:fmt(q,1), Fw:fmt(FwY), cum:fmt(cumY), Hi:fmt(Hi)});
   }
-  ventoDados = {rows, ped, npav};
 
-  // fill metrics
-  const last = rows[rows.length-1];
-  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  set('vr-V0', V0.toFixed(0));
-  set('vr-S2h', last.S2.toFixed(3));
-  set('vr-Vk', last.Vk.toFixed(1));
-  set('vr-q', last.q.toFixed(0));
+  ventResult = {x:rX, y:rY, cumX, cumY, M1x, M1y};
 
-  // fill tables
-  const mkTbl = (bodyId, fwKey, cumKey) => {
-    const tbody = document.getElementById(bodyId);
-    if(!tbody) return;
-    tbody.innerHTML = rows.map(r =>
-      `<tr><td>${r.i}</td><td>${r.z.toFixed(1)}</td><td>${r.S2.toFixed(3)}</td>
-       <td>${r.Vk.toFixed(1)}</td><td>${r.q.toFixed(0)}</td>
-       <td style="color:var(--accent)">${r[fwKey].toFixed(2)}</td>
-       <td style="color:var(--blue)">${r[cumKey].toFixed(2)}</td></tr>`
-    ).join('');
-  };
-  mkTbl('tbody-ventox','FwX','cumX');
-  mkTbl('tbody-ventoy','FwY','cumY');
+  // Topo
+  const s2t = S2(H, cat, cls);
+  const Vkt = V0 * S1 * s2t * S3;
+  const qt  = 0.613 * Vkt * Vkt;
 
-  document.getElementById('div-vento-res').style.display='block';
-  drawVentoChart(rows);
+  gel('vento-topo-metrics').innerHTML = [
+    [fmt(V0,0)+' m/s','V₀'],
+    [fmt(s2t,4),'S₂(H)'],
+    [fmt(Vkt)+' m/s','Vk(H)'],
+    [fmt(qt,0)+' N/m²','q(H)'],
+  ].map(([v,l]) => `<div class="metric"><div class="metric-v">${v}</div><div class="metric-l">${l}</div></div>`).join('');
+
+  const row = (r,dir) => `<tr><td>${r.pav}</td><td>${r.z}</td><td>${r.hi}</td><td>${r.s2}</td><td>${r.Vk}</td><td>${r.q}</td><td>${r.Fw}</td><td>${r.cum}</td><td>${r.Hi}</td></tr>`;
+  gel('tbody-vx').innerHTML = rX.map(r => row(r,'x')).join('');
+  gel('tbody-vy').innerHTML = rY.map(r => row(r,'y')).join('');
+
+  gel('vento-tot-x').innerHTML = `Σ Fw_X = <strong>${fmt(cumX)} kN</strong> &nbsp;|&nbsp; M₁_tot_X = <strong>${fmt(M1x)} kN·m</strong> &nbsp;|&nbsp; αa = ${(alpha_a*1000).toFixed(3)}‰ &nbsp; αn = ${fmt(alpha_n,4)}`;
+  gel('vento-tot-y').innerHTML = `Σ Fw_Y = <strong>${fmt(cumY)} kN</strong> &nbsp;|&nbsp; M₁_tot_Y = <strong>${fmt(M1y)} kN·m</strong>`;
+
+  // Desaprumo info
+  gel('desaprumo-res').innerHTML = `
+    <div class="g4">
+      <div class="metric"><div class="metric-v">${(alpha_a_raw*1000).toFixed(3)}‰</div><div class="metric-l">αa = 1/(100√H)</div></div>
+      <div class="metric"><div class="metric-v">${fmt(alpha_n,4)}</div><div class="metric-l">αn (n=${n_pil} pil.)</div></div>
+      <div class="metric"><div class="metric-v">${fmt(alpha_a*1000,3)}‰</div><div class="metric-l">αa adotado (≥1/200)</div></div>
+      <div class="metric"><div class="metric-v">${fmt(H)} m</div><div class="metric-l">H total</div></div>
+    </div>`;
+
+  gel('div-vento-res').style.display = 'block';
+  calcReparticao(rX, rY);
+  buildGZtable();
+  syncAlphaFromPilares();
+  drawVentoChart();
 }
 
-let chartV = null;
-function drawVentoChart(rows) {
-  const ctx = document.getElementById('chartVento');
-  if(!ctx) return;
-  if(chartV) { chartV.destroy(); chartV=null; }
-  chartV = new Chart(ctx, {
-    type:'bar',
-    data:{
-      labels: rows.map(r=>`Pav ${r.i} (z=${r.z}m)`),
-      datasets:[
-        {label:'Fw Dir. X (kN)',data:rows.map(r=>r.FwX),backgroundColor:'rgba(232,197,71,0.7)',borderColor:'#e8c547',borderWidth:1},
-        {label:'Fw Dir. Y (kN)',data:rows.map(r=>r.FwY),backgroundColor:'rgba(96,165,250,0.6)',borderColor:'#60a5fa',borderWidth:1}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:true,labels:{color:'#9aa0af',boxWidth:12}}},
-      scales:{
-        x:{ticks:{color:'#9aa0af',font:{size:10}},grid:{color:'#2e333c'}},
-        y:{ticks:{color:'#9aa0af'},grid:{color:'#2e333c'},title:{display:true,text:'Força (kN)',color:'#626878'}}
-      }
-    }
+/* ═══ REPARTIÇÃO (Diafragma Rígido) ═══
+   K = 3·EI_eq/H³  (modelo carga concentrada)
+   Araújo, Cap.6 — Equação 7.5.3
+═══════════════════════════════════════ */
+function calcReparticao(rX, rY) {
+  if (!pilares.length || !rX.length) return;
+  const H = calcH();
+  const fck = gv('d-fck') || 25;
+  const Eci = 5600 * Math.sqrt(fck) * 1000; // kN/m²
+  const Ecs = 0.85 * Eci;
+
+  const ps = pilares.map(p => {
+    const EIx = Ecs * (p.bx * Math.pow(p.hx, 3) / 12);
+    const EIy = Ecs * (p.by * Math.pow(p.hy, 3) / 12);
+    const Kx  = 3 * EIx / Math.pow(H, 3);
+    const Ky  = 3 * EIy / Math.pow(H, 3);
+    return {...p, EIx, EIy, Kx, Ky};
   });
+
+  const SKx = ps.reduce((s,p) => s + p.Kx, 0);
+  const SKy = ps.reduce((s,p) => s + p.Ky, 0);
+  const xCR = SKy > 0 ? ps.reduce((s,p) => s + p.Ky * p.x, 0) / SKy : 0;
+  const yCR = SKx > 0 ? ps.reduce((s,p) => s + p.Kx * p.y, 0) / SKx : 0;
+
+  gel('repart-cr').innerHTML = [
+    [fmt(xCR,3)+' m','x_CR'],
+    [fmt(yCR,3)+' m','y_CR'],
+    [(SKx/1e3).toFixed(1)+'k kN/m','ΣKx'],
+    [(SKy/1e3).toFixed(1)+'k kN/m','ΣKy'],
+  ].map(([v,l]) => `<div class="metric"><div class="metric-v">${v}</div><div class="metric-l">${l}</div></div>`).join('');
+
+  // Torção — excentricidade NBR 6123: ea=0,075·Lx, eb=0,075·Ly
+  const Lx = gv('l-Lx') || 12; const Ly = gv('l-Ly') || 8;
+  const ex = 0.075 * Lx; const ey = 0.075 * Ly;
+
+  const IT = ps.reduce((s,p) => s + p.Kx * Math.pow(p.y - yCR, 2) + p.Ky * Math.pow(p.x - xCR, 2), 0);
+
+  const FwX_top = parseFloat(rX[rX.length - 1].Fw);
+  const FwY_top = parseFloat(rY[rY.length - 1].Fw);
+  const MT_x = FwX_top * ey;
+  const MT_y = FwY_top * ex;
+
+  gel('tbody-repart').innerHTML = ps.map(p => {
+    const fx_t = SKx > 0 ? p.Kx / SKx * FwX_top : 0;
+    const fx_r = IT > 0 ? p.Kx * (p.y - yCR) / IT * MT_x : 0;
+    const fy_t = SKy > 0 ? p.Ky / SKy * FwY_top : 0;
+    const fy_r = IT > 0 ? -p.Ky * (p.x - xCR) / IT * MT_y : 0;
+    return `<tr><td>${p.id}</td><td>${fmt(p.x,2)}</td><td>${fmt(p.y,2)}</td>
+      <td>${p.Kx.toFixed(2)}</td><td>${p.Ky.toFixed(2)}</td>
+      <td>${fmt(p.x - xCR,3)}</td><td>${fmt(p.y - yCR,3)}</td>
+      <td>${fmt(fx_t + fx_r,3)}</td><td>${fmt(fy_t + fy_r,3)}</td></tr>`;
+  }).join('');
 }
 
-// ===== ALPHA =====
+/* ═══════════════════════════════════════════════════════════
+   PARÂM. α — NBR 6118 §15.5.2
+   Validado: αa=1/(100·√H), αn=√((1+1/n)/2)
+═══════════════════════════════════════════════════════════ */
 function calcAlpha() {
-  const H = parseFloat(document.getElementById('al-H')?.value||12);
-  const Nk = parseFloat(document.getElementById('al-Nk')?.value||2000);
-  const fck = parseFloat(document.getElementById('al-fck')?.value||25);
-  const Icx = parseFloat(document.getElementById('al-Icx')?.value||0.003);
-  const Icy = parseFloat(document.getElementById('al-Icy')?.value||0.002);
+  const H   = gv('al-H')   || calcH();
+  const Nk  = gv('al-Nk')  || 2000;
+  const fck = gv('al-fck') || gv('d-fck') || 25;
+  const Icx = gv('al-Icx') || 0.003;
+  const Icy = gv('al-Icy') || 0.002;
 
-  const Eci_MPa = 5600*Math.sqrt(fck);
-  const Eci = Eci_MPa*1000; // kN/m²
-  const Ecs = 0.85*Eci;
-
-  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  set('al-Eci', Eci_MPa.toFixed(0)+' MPa');
-  set('al-Ecs', (Ecs/1000).toFixed(0)+' MPa (= '+Ecs.toExponential(3)+' kN/m²)');
+  const Eci_MPa = 5600 * Math.sqrt(fck);
+  const Eci_kNm2 = Eci_MPa * 1000;
+  const Ecs = 0.85 * Eci_kNm2;
 
   const ax = H * Math.sqrt(Nk / (Ecs * Icx));
   const ay = H * Math.sqrt(Nk / (Ecs * Icy));
 
-  set('al-ax', ax.toFixed(3));
-  set('al-ay', ay.toFixed(3));
+  gel('alpha-interm').innerHTML = `
+    <div style="background:var(--sur2);border:1px solid var(--bd);border-radius:var(--r);padding:12px;font-family:var(--fmono);font-size:11px;line-height:2">
+      <div style="color:var(--tx2)">Módulos de elasticidade:</div>
+      <div>Eci = 5600·√${fck} = <span style="color:var(--acc)">${fmt(Eci_MPa,0)} MPa</span></div>
+      <div>Eci = <span style="color:var(--tx)">${(Eci_kNm2).toLocaleString('pt-BR')} kN/m²</span></div>
+      <div>Ecs = 0,85·Eci = <span style="color:var(--acc)">${(Ecs).toLocaleString('pt-BR')} kN/m²</span></div>
+      <div style="margin-top:6px;color:var(--tx2)">Dados de entrada:</div>
+      <div>H = ${fmt(H)} m | Nk = ${Nk} kN</div>
+      <div>ΣIc_x = ${Icx} m⁴ | ΣIc_y = ${Icy} m⁴</div>
+    </div>`;
 
-  function classify(a, elId) {
-    const el = document.getElementById(elId);
-    if(!el) return;
-    if(a <= 0.6) {
-      el.innerHTML = '<span class="class-tag class-ok">α ≤ 0,6 — Pequena Esbeltez</span><br><small style="color:var(--text2)">Dispensa análise de 2ª ordem global</small>';
-    } else if(a <= 1.0) {
-      el.innerHTML = '<span class="class-tag class-warn">0,6 &lt; α ≤ 1,0 — Nós Fixos ✓</span><br><small style="color:var(--text2)">Requisito do Trabalho 1 atendido</small>';
-    } else {
-      el.innerHTML = '<span class="class-tag class-fail">α &gt; 1,0 — Nós Móveis ✗</span><br><small style="color:var(--red)">Refazer o lançamento! Aumentar seções dos pilares.</small>';
-    }
+  function clsAlpha(a) {
+    if (a <= 0.6) return {label:`α = ${fmt(a,4)} ≤ 0,60 — Pequena Esbeltez`, cls:'cl-blue'};
+    if (a <= 1.0) return {label:`α = ${fmt(a,4)} — Nós Fixos ✓`, cls:'cl-ok'};
+    return {label:`α = ${fmt(a,4)} > 1,00 — Nós Móveis! Refazer.`, cls:'cl-err'};
   }
-  classify(ax,'al-ax-class');
-  classify(ay,'al-ay-class');
+  const cx = clsAlpha(ax), cy = clsAlpha(ay);
+  gel('alpha-results').innerHTML = ['X','Y'].map((d,i) => {
+    const c = d==='X'?cx:cy; const a = d==='X'?ax:ay;
+    return `<div class="card" style="margin:0">
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--tx2);margin-bottom:8px">Direção ${d}</div>
+      <div class="metric"><div class="metric-v" style="color:${a>1?'var(--red)':a>0.6?'var(--green)':'var(--blue)'}">${fmt(a,4)}</div><div class="metric-l">α_${d}</div></div>
+      <div class="${c.cls}" style="margin-top:8px">${c.label}</div>
+    </div>`;
+  }).join('');
+  gel('div-alpha-res').style.display = 'block';
 
-  const ok = ax>0.6&&ax<=1.0&&ay>0.6&&ay<=1.0;
-  const el = document.getElementById('al-conclusao');
-  if(el) {
-    if(ok) {
-      el.innerHTML='<div class="alert alert-ok">✅ Estrutura classificada como NÓS FIXOS nas duas direções. Prossiga para o cálculo de γZ.</div>';
-    } else if(ax>1.0||ay>1.0) {
-      el.innerHTML='<div class="alert alert-err">❌ Estrutura NÓS MÓVEIS em pelo menos uma direção. Retornar ao lançamento e aumentar seções ou número de pilares.</div>';
-    } else {
-      el.innerHTML='<div class="alert alert-warn">⚠️ Verifique os valores. α ≤ 0,6 em alguma direção — reduzir seções pode ser possível.</div>';
-    }
-  }
-  document.getElementById('div-alpha-res').style.display='block';
+  const ok = ax <= 1.0 && ay <= 1.0;
+  gel('alpha-conclusao').innerHTML = `<div class="alert ${ok?'alert-ok':'alert-e'}">
+    ${ok ? '✅ Estrutura válida para o Trabalho 1. Prossiga ao cálculo de γZ.'
+         : '❌ Uma ou mais direções com α > 1,0. Aumentar rigidez dos pilares (seção maior ou adicionar novos pilares).'}
+  </div>`;
 }
 
-// ===== GAMMA Z =====
+function syncAlphaFromPilares() {
+  const H = calcH();
+  gel('al-H').value = fmt(H);
+  const fck = gv('d-fck') || 25;
+  gel('al-fck').value = fck;
+  if (pilares.length) {
+    const Nk = pilares.reduce((s,p) => s + (p.Nd||0), 0);
+    if (Nk > 0) gel('al-Nk').value = Nk;
+    const Icx = pilares.reduce((s,p) => s + p.bx * Math.pow(p.hx,3)/12, 0);
+    const Icy = pilares.reduce((s,p) => s + p.by * Math.pow(p.hy,3)/12, 0);
+    gel('al-Icx').value = Icx.toFixed(5);
+    gel('al-Icy').value = Icy.toFixed(5);
+  }
+}
+
+/* ═══ γZ ═══ */
+function buildGZtable() {
+  const n = gi('l-npav') || 4;
+  const ped = gv('l-ped') || 3.0;
+  const ped1 = gv('l-ped1') || 3.0;
+  const Apav = (gv('l-Lx')||12) * (gv('l-Ly')||8);
+  const pkPav = ((gv('a-ppl')||3)+(gv('a-rev')||1)+(gv('a-alv')||1.5)+(gv('a-imp')||0.5)+(gv('a-qk')||1.5))*Apav;
+  const ndDef = pilares.length ? pilares.reduce((s,p)=>s+(p.Nd||0),0) : pkPav || 2000;
+  let hx='', hy='';
+  for (let i = 1; i <= n; i++) {
+    const z = i === 1 ? ped1 : ped1 + (i-1)*ped;
+    const fwXdef = ventResult.x[i-1] ? ventResult.x[i-1].Fw : '5.0';
+    const fwYdef = ventResult.y[i-1] ? ventResult.y[i-1].Fw : '4.0';
+    const ndRow = fmt(ndDef/n, 0);
+    hx += `<tr><td>${i}</td><td>${fmt(z)}</td>
+      <td><input type="number" value="${ndRow}" step="50" class="sin" id="gzx-nd-${i}"></td>
+      <td><input type="number" value="${fwXdef}" step="0.1" class="sin" id="gzx-fw-${i}"></td>
+      <td><input type="number" value="0.50" step="0.01" class="sin" id="gzx-d-${i}"></td></tr>`;
+    hy += `<tr><td>${i}</td><td>${fmt(z)}</td>
+      <td><input type="number" value="${ndRow}" step="50" class="sin" id="gzy-nd-${i}"></td>
+      <td><input type="number" value="${fwYdef}" step="0.1" class="sin" id="gzy-fw-${i}"></td>
+      <td><input type="number" value="0.40" step="0.01" class="sin" id="gzy-d-${i}"></td></tr>`;
+  }
+  gel('tbody-gzx').innerHTML = hx;
+  gel('tbody-gzy').innerHTML = hy;
+}
+
 function calcGZ() {
-  const M1 = parseFloat(document.getElementById('gz-M1')?.value||500);
-  const dM = parseFloat(document.getElementById('gz-dM')?.value||80);
-  const gz = 1/(1 - dM/M1);
-  const rat = (dM/M1*100).toFixed(1);
-  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  set('gz-val', gz.toFixed(3));
-  set('gz-M1v', M1.toFixed(0));
-  set('gz-dMv', dM.toFixed(0));
-  set('gz-rat', rat+'%');
-  const cl = document.getElementById('gz-class');
-  if(cl) {
-    if(gz <= 1.1) cl.innerHTML='<span class="class-tag class-ok">γZ ≤ 1,10 — Ação do vento desprezível</span>';
-    else if(gz <= 1.3) cl.innerHTML='<span class="class-tag class-warn">1,10 &lt; γZ ≤ 1,30 — Nós Fixos válido</span>';
-    else cl.innerHTML='<span class="class-tag class-fail">γZ &gt; 1,30 — Análise rigorosa necessária!</span>';
-  }
-  document.getElementById('div-gz-res').style.display='block';
-}
-
-function gerarTabelaGZ() {
-  const npav = parseInt(document.getElementById('vt-npav')?.value)||
-               parseInt(document.getElementById('l-npav')?.value)||4;
-  const ped = parseFloat(document.getElementById('vt-ped')?.value)||
-              parseFloat(document.getElementById('l-ped')?.value)||3;
-  let hx='',hy='';
-  for(let i=1;i<=npav;i++) {
-    const z=(i*ped).toFixed(1);
-    hx+=`<tr><td>${i}</td><td>${z}</td>
-      <td><input type="number" value="500" step="50" style="width:70px" id="gzx-Nd-${i}"></td>
-      <td><input type="number" value="5" step="0.1" style="width:70px" id="gzx-Fw-${i}"></td>
-      <td><input type="number" value="0.5" step="0.01" style="width:70px" id="gzx-d-${i}"></td></tr>`;
-    hy+=`<tr><td>${i}</td><td>${z}</td>
-      <td><input type="number" value="500" step="50" style="width:70px" id="gzy-Nd-${i}"></td>
-      <td><input type="number" value="4" step="0.1" style="width:70px" id="gzy-Fw-${i}"></td>
-      <td><input type="number" value="0.4" step="0.01" style="width:70px" id="gzy-d-${i}"></td></tr>`;
-  }
-  document.getElementById('tbody-gzx').innerHTML=hx;
-  document.getElementById('tbody-gzy').innerHTML=hy;
-  window._gzNPav=npav; window._gzPed=ped;
-}
-
-function calcGZtabela() {
-  const npav = window._gzNPav||4;
-  const ped = window._gzPed||3;
-  let M1x=0,dMx=0,M1y=0,dMy=0;
-  let cumFwX=0,cumFwY=0;
-  for(let i=npav;i>=1;i--) {
-    const z = i*ped;
-    const NdX = parseFloat(document.getElementById(`gzx-Nd-${i}`)?.value||500);
-    const FwX = parseFloat(document.getElementById(`gzx-Fw-${i}`)?.value||5);
-    const dX = parseFloat(document.getElementById(`gzx-d-${i}`)?.value||0.5)/100; // cm->m
-    const NdY = parseFloat(document.getElementById(`gzy-Nd-${i}`)?.value||500);
-    const FwY = parseFloat(document.getElementById(`gzy-Fw-${i}`)?.value||4);
-    const dY = parseFloat(document.getElementById(`gzy-d-${i}`)?.value||0.4)/100;
-    cumFwX+=FwX; cumFwY+=FwY;
-    M1x += cumFwX * ped;
-    M1y += cumFwY * ped;
+  const n = gi('l-npav') || 4;
+  const ped = gv('l-ped') || 3.0;
+  const ped1 = gv('l-ped1') || 3.0;
+  let M1x=0,dMx=0,M1y=0,dMy=0,cumFwX=0,cumFwY=0;
+  // Integração de cima para baixo (Araújo eq. método incremental)
+  for (let i = n; i >= 1; i--) {
+    const hi = i === 1 ? ped1 : ped;
+    const NdX  = parseFloat(gel(`gzx-nd-${i}`)?.value || 500);
+    const FwX  = parseFloat(gel(`gzx-fw-${i}`)?.value || 5);
+    const dX   = parseFloat(gel(`gzx-d-${i}`)?.value  || 0.5) / 100;
+    const NdY  = parseFloat(gel(`gzy-nd-${i}`)?.value || 500);
+    const FwY  = parseFloat(gel(`gzy-fw-${i}`)?.value || 4);
+    const dY   = parseFloat(gel(`gzy-d-${i}`)?.value  || 0.4) / 100;
+    cumFwX += FwX; cumFwY += FwY;
+    M1x += cumFwX * hi;
+    M1y += cumFwY * hi;
     dMx += NdX * dX;
     dMy += NdY * dY;
   }
-  const gzX = M1x>0 ? 1/(1-dMx/M1x) : 1;
-  const gzY = M1y>0 ? 1/(1-dMy/M1y) : 1;
-  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  set('gztx-val', gzX.toFixed(3));
-  set('gzty-val', gzY.toFixed(3));
-  function clsGz(gz, elId) {
-    const el=document.getElementById(elId);
-    if(!el) return;
-    if(gz<=1.1) el.innerHTML='<span class="class-tag class-ok">γZ ≤ 1,10</span>';
-    else if(gz<=1.3) el.innerHTML='<span class="class-tag class-warn">1,10 &lt; γZ ≤ 1,30 ✓</span>';
-    else el.innerHTML='<span class="class-tag class-fail">γZ &gt; 1,30 — Rigoroso!</span>';
+  const gzX = M1x > 0 ? 1 / (1 - dMx / M1x) : 1;
+  const gzY = M1y > 0 ? 1 / (1 - dMy / M1y) : 1;
+
+  function gzCls(gz) {
+    if (gz <= 1.1) return {cls:'cl-blue', label:`γZ = ${fmt(gz,4)} ≤ 1,10 — dispensar majoração`};
+    if (gz <= 1.3) return {cls:'cl-ok',  label:`γZ = ${fmt(gz,4)} ≤ 1,30 — Nós Fixos OK`};
+    return          {cls:'cl-err',  label:`γZ = ${fmt(gz,4)} > 1,30 — Análise rigorosa!`};
   }
-  clsGz(gzX,'gztx-class'); clsGz(gzY,'gzty-class');
-  document.getElementById('div-gztab-res').style.display='block';
+  const cx=gzCls(gzX), cy=gzCls(gzY);
+  gel('gz-res-x').innerHTML = `<div class="${cx.cls}">${cx.label}</div>
+    <div style="font-family:var(--fmono);font-size:11px;color:var(--tx2);margin-top:6px">
+      M₁_x = ${fmt(M1x)} kN·m &nbsp;|&nbsp; ΔM_x = ${fmt(dMx)} kN·m &nbsp;|&nbsp; ΔM/M₁ = ${fmt(dMx/M1x*100,1)}%
+    </div>`;
+  gel('gz-res-y').innerHTML = `<div class="${cy.cls}">${cy.label}</div>
+    <div style="font-family:var(--fmono);font-size:11px;color:var(--tx2);margin-top:6px">
+      M₁_y = ${fmt(M1y)} kN·m &nbsp;|&nbsp; ΔM_y = ${fmt(dMy)} kN·m &nbsp;|&nbsp; ΔM/M₁ = ${fmt(dMy/M1y*100,1)}%
+    </div>`;
 }
 
-// ===== RELATÓRIO =====
+/* ═══════════════════════════════════════════════════════════
+   CANVAS — PLANTA BAIXA INTERATIVA
+═══════════════════════════════════════════════════════════ */
+const MRG = {l:52, r:20, t:28, b:38};
+
+function w2c(wx, wy) {
+  const cvs = gel('cvs-planta');
+  const Lx = gv('l-Lx')||12, Ly = gv('l-Ly')||8;
+  const W = cvs.width - MRG.l - MRG.r;
+  const H = cvs.height - MRG.t - MRG.b;
+  return {x: MRG.l + wx/Lx*W, y: MRG.t + (1-wy/Ly)*H};
+}
+function c2w(cx, cy) {
+  const cvs = gel('cvs-planta');
+  const Lx = gv('l-Lx')||12, Ly = gv('l-Ly')||8;
+  const W = cvs.width - MRG.l - MRG.r;
+  const H = cvs.height - MRG.t - MRG.b;
+  return {x: (cx-MRG.l)/W*Lx, y: (1-(cy-MRG.t)/H)*Ly};
+}
+
+function drawCanvas() {
+  const cvs = gel('cvs-planta');
+  if (!cvs) return;
+  const ctx = cvs.getContext('2d');
+  const W = cvs.width, H = cvs.height;
+  const Lx = gv('l-Lx')||12, Ly = gv('l-Ly')||8;
+  const gW = W - MRG.l - MRG.r, gH = H - MRG.t - MRG.b;
+  const isDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+
+  ctx.clearRect(0,0,W,H);
+
+  // Background
+  ctx.fillStyle = isDark ? '#14181f' : '#f4f2ee';
+  ctx.fillRect(0,0,W,H);
+
+  // Grid
+  ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  ctx.lineWidth = 0.5;
+  for (let x=0; x<=Lx; x++) {
+    const cx = MRG.l + x/Lx*gW;
+    ctx.beginPath(); ctx.moveTo(cx, MRG.t); ctx.lineTo(cx, MRG.t+gH); ctx.stroke();
+  }
+  for (let y=0; y<=Ly; y++) {
+    const cy = MRG.t + (1-y/Ly)*gH;
+    ctx.beginPath(); ctx.moveTo(MRG.l, cy); ctx.lineTo(MRG.l+gW, cy); ctx.stroke();
+  }
+
+  // Border
+  ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.28)' : 'rgba(0,0,0,0.4)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(MRG.l, MRG.t, gW, gH);
+
+  // Axis labels
+  ctx.fillStyle = isDark ? '#4e5668' : '#9aa0af';
+  ctx.font = '10px IBM Plex Mono, monospace';
+  ctx.textAlign = 'center';
+  for (let x=0; x<=Lx; x+=2) {
+    ctx.fillText(x, MRG.l + x/Lx*gW, MRG.t+gH+14);
+  }
+  ctx.textAlign = 'right';
+  for (let y=0; y<=Ly; y+=2) {
+    ctx.fillText(y, MRG.l-6, MRG.t+(1-y/Ly)*gH+3.5);
+  }
+  ctx.textAlign = 'center';
+  ctx.fillText('x (m)', MRG.l+gW/2, H-4);
+  ctx.save(); ctx.translate(12, MRG.t+gH/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('y (m)', 0, 0); ctx.restore();
+
+  // Pilares
+  pilares.forEach((p, i) => {
+    const scX = gW/Lx, scY = gH/Ly;
+    const cp = w2c(p.x, p.y);
+    const rw = Math.max(p.bx * scX, 8);
+    const rh = Math.max(p.hx * scY, 8);
+    const sel = i === selectedIdx;
+
+    ctx.fillStyle = sel
+      ? (isDark ? 'rgba(255,180,0,0.65)' : 'rgba(200,140,0,0.65)')
+      : (isDark ? 'rgba(232,197,71,0.4)' : 'rgba(180,140,10,0.4)');
+    ctx.strokeStyle = sel
+      ? (isDark ? '#ffd700' : '#b08000')
+      : (isDark ? '#e8c547' : '#b08020');
+    ctx.lineWidth = sel ? 2 : 1.2;
+
+    ctx.beginPath();
+    ctx.rect(cp.x - rw/2, cp.y - rh/2, rw, rh);
+    ctx.fill(); ctx.stroke();
+
+    ctx.fillStyle = isDark ? '#fff' : '#1a1400';
+    ctx.font = `bold ${Math.max(Math.min(rw/p.id.length*0.9,12),8)}px IBM Plex Mono, monospace`;
+    ctx.textAlign = 'center';
+    ctx.fillText(p.id, cp.x, cp.y + 3.5);
+  });
+
+  // Pending ghost
+  if (addingMode && pendingPos) {
+    const scX = gW/Lx, scY = gH/Ly;
+    const bx = gv('fp-bx')||0.2, hx = gv('fp-hx')||0.5;
+    const cp = w2c(pendingPos.x, pendingPos.y);
+    const rw = Math.max(bx*scX, 8), rh = Math.max(hx*scY, 8);
+    ctx.fillStyle = 'rgba(100,220,100,0.35)';
+    ctx.strokeStyle = '#3dd68c';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.rect(cp.x-rw/2, cp.y-rh/2, rw, rh);
+    ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
+  }
+
+  // Axes
+  ctx.fillStyle = isDark ? 'rgba(255,255,255,0.22)' : 'rgba(0,0,0,0.2)';
+  ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('→ X', MRG.l+gW+4, MRG.t+gH/2+4);
+  ctx.textAlign = 'center';
+  ctx.fillText('↑ Y', MRG.l+gW/2, MRG.t-10);
+}
+
+function setupCanvas() {
+  const cvs = gel('cvs-planta');
+  if (!cvs) return;
+
+  cvs.addEventListener('mousedown', e => {
+    const rect = cvs.getBoundingClientRect();
+    const scX = cvs.width/rect.width, scY = cvs.height/rect.height;
+    const cx = (e.clientX - rect.left)*scX;
+    const cy = (e.clientY - rect.top)*scY;
+    const w = c2w(cx, cy);
+    const Lx = gv('l-Lx'), Ly = gv('l-Ly');
+    if (w.x < 0 || w.x > Lx || w.y < 0 || w.y > Ly) return;
+
+    if (addingMode) {
+      pendingPos = {x: Math.round(w.x*100)/100, y: Math.round(w.y*100)/100};
+      confirmPilar();
+      drawCanvas();
+    } else {
+      selectedIdx = -1; dragIdx = -1;
+      const Lx2=gv('l-Lx'), Ly2=gv('l-Ly');
+      const gW=cvs.width-MRG.l-MRG.r, gH=cvs.height-MRG.t-MRG.b;
+      pilares.forEach((p, i) => {
+        const cp = w2c(p.x, p.y);
+        const rw = Math.max(p.bx*(gW/Lx2), 8);
+        const rh = Math.max(p.hx*(gH/Ly2), 8);
+        if (cx>=cp.x-rw/2 && cx<=cp.x+rw/2 && cy>=cp.y-rh/2 && cy<=cp.y+rh/2) {
+          selectedIdx = i; dragIdx = i;
+        }
+      });
+      drawCanvas(); updatePilaresTable();
+    }
+  });
+
+  cvs.addEventListener('mousemove', e => {
+    const rect = cvs.getBoundingClientRect();
+    const scX = cvs.width/rect.width, scY = cvs.height/rect.height;
+    const cx = (e.clientX-rect.left)*scX, cy = (e.clientY-rect.top)*scY;
+    if (dragIdx >= 0) {
+      const w = c2w(cx, cy);
+      const Lx=gv('l-Lx'), Ly=gv('l-Ly');
+      pilares[dragIdx].x = Math.max(0, Math.min(Lx, Math.round(w.x*100)/100));
+      pilares[dragIdx].y = Math.max(0, Math.min(Ly, Math.round(w.y*100)/100));
+      drawCanvas(); updatePilaresTable();
+    }
+    // Cursor
+    let hover = false;
+    const Lx=gv('l-Lx'), Ly=gv('l-Ly');
+    const gW=cvs.width-MRG.l-MRG.r, gH=cvs.height-MRG.t-MRG.b;
+    pilares.forEach(p => {
+      const cp = w2c(p.x, p.y);
+      const rw = Math.max(p.bx*(gW/Lx), 8), rh = Math.max(p.hx*(gH/Ly), 8);
+      if (cx>=cp.x-rw/2 && cx<=cp.x+rw/2 && cy>=cp.y-rh/2 && cy<=cp.y+rh/2) hover=true;
+    });
+    cvs.style.cursor = addingMode ? 'crosshair' : (hover ? 'grab' : 'crosshair');
+  });
+
+  cvs.addEventListener('mouseup', () => { if(dragIdx>=0){dragIdx=-1; syncAlphaFromPilares();} });
+  cvs.addEventListener('mouseleave', () => { dragIdx=-1; });
+}
+
+/* ═══ PILARES ═══ */
+function startAddPilar() {
+  addingMode = true;
+  pendingPos = null;
+  gel('alert-click').style.display = 'block';
+  drawCanvas();
+}
+
+function addPilarCenter() {
+  const Lx = gv('l-Lx')||12, Ly = gv('l-Ly')||8;
+  pendingPos = {x: Lx/2, y: Ly/2};
+  confirmPilar();
+}
+
+function confirmPilar() {
+  if (!pendingPos) { gel('alert-click').style.display='block'; return; }
+  const bx=gv('fp-bx')||0.2, hx=gv('fp-hx')||0.5;
+  const by=gv('fp-by')||0.2, hy=gv('fp-hy')||0.5;
+  const nd=gv('fp-nd')||500;
+  pilares.push({
+    id: gel('fp-id').value || `P${pilares.length+1}`,
+    x: pendingPos.x, y: pendingPos.y,
+    bx, hx, by, hy, Nd: nd,
+    Ix: bx*Math.pow(hx,3)/12,
+    Iy: by*Math.pow(hy,3)/12,
+  });
+  addingMode = false; pendingPos = null;
+  gel('alert-click').style.display = 'none';
+  gel('fp-id').value = `P${pilares.length+1}`;
+  drawCanvas(); updatePilaresTable(); syncAlphaFromPilares();
+}
+
+function clearPilares() {
+  pilares = []; selectedIdx = -1; drawCanvas(); updatePilaresTable(); syncAlphaFromPilares();
+}
+
+function delPilar(i) {
+  pilares.splice(i, 1); selectedIdx = -1; drawCanvas(); updatePilaresTable(); syncAlphaFromPilares();
+}
+
+function updatePilaresTable() {
+  const fck = gv('d-fck')||25;
+  const Eci = 5600*Math.sqrt(fck)*1000*0.85;
+  const tbody = gel('tbody-pilares');
+  tbody.innerHTML = pilares.map((p,i) => {
+    const Ix = (p.bx*Math.pow(p.hx,3)/12).toFixed(5);
+    const Iy = (p.by*Math.pow(p.hy,3)/12).toFixed(5);
+    return `<tr style="${i===selectedIdx?'background:rgba(232,197,71,.1)':''}">
+      <td>${i+1}</td><td style="color:var(--acc);font-weight:600">${p.id}</td>
+      <td>${fmt(p.x,2)}</td><td>${fmt(p.y,2)}</td>
+      <td>${p.bx}</td><td>${p.hx}</td><td>${p.by}</td><td>${p.hy}</td>
+      <td>${Ix}</td><td>${Iy}</td><td>${p.Nd}</td>
+      <td><button class="btn btn-d" onclick="delPilar(${i})">✕</button></td>
+    </tr>`;
+  }).join('');
+
+  const sumIx = pilares.reduce((s,p)=>s+p.bx*Math.pow(p.hx,3)/12,0);
+  const sumIy = pilares.reduce((s,p)=>s+p.by*Math.pow(p.hy,3)/12,0);
+  const sumNd = pilares.reduce((s,p)=>s+(p.Nd||0),0);
+  const EIx = Eci*sumIx, EIy = Eci*sumIy;
+  gel('div-EI').innerHTML = [
+    [`${(EIx/1e6).toFixed(2)}×10⁶`, 'ΣEI_x (kN·m²)'],
+    [`${(EIy/1e6).toFixed(2)}×10⁶`, 'ΣEI_y (kN·m²)'],
+    [pilares.length, 'N.º Pilares'],
+    [`${sumNd} kN`, 'Σ Nd'],
+  ].map(([v,l])=>`<div class="metric"><div class="metric-v" style="font-size:15px">${v}</div><div class="metric-l">${l}</div></div>`).join('');
+}
+
+/* ═══ VENTO CHART ═══ */
+function drawVentoChart() {
+  const cvs = gel('cvs-vento');
+  if (!cvs || !ventResult.x.length) return;
+  const ctx = cvs.getContext('2d');
+  const W = cvs.offsetWidth || 650; cvs.width = W;
+  const H = 250; cvs.height = H;
+  const isDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
+  ctx.clearRect(0,0,W,H);
+
+  const data = ventResult.x;
+  const n = data.length;
+  const M = {l:45, r:90, t:16, b:28};
+  const bW = Math.min((W - M.l - M.r) / (n * 2.4), 30);
+  const maxFw = Math.max(
+    ...data.map(d => parseFloat(d.Fw)||0),
+    ...ventResult.y.map(d => parseFloat(d.Fw)||0)
+  ) * 1.2 || 10;
+
+  ctx.fillStyle = isDark?'rgba(255,255,255,0.04)':'rgba(0,0,0,0.03)';
+  ctx.fillRect(M.l, M.t, W-M.l-M.r, H-M.t-M.b);
+
+  const bars = (arr, offset, color) => arr.forEach((r,i) => {
+    const fw = parseFloat(r.Fw)||0;
+    const bH = (H-M.t-M.b)*fw/maxFw;
+    const bx = M.l + i*(bW*2.4) + offset*bW*1.1;
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.roundRect(bx, H-M.b-bH, bW, bH, 2);
+    ctx.fill();
+  });
+  bars(data, 0, isDark?'rgba(232,197,71,.75)':'rgba(180,130,0,.65)');
+  bars(ventResult.y, 1, isDark?'rgba(91,164,245,.7)':'rgba(30,100,200,.55)');
+
+  ctx.strokeStyle = isDark?'rgba(255,255,255,.15)':'rgba(0,0,0,.15)';
+  ctx.lineWidth = 0.5;
+  ctx.beginPath(); ctx.moveTo(M.l,M.t); ctx.lineTo(M.l,H-M.b); ctx.lineTo(W-M.r,H-M.b); ctx.stroke();
+
+  ctx.fillStyle = isDark?'#4e5668':'#9aa0af';
+  ctx.font = '9px IBM Plex Mono,monospace'; ctx.textAlign = 'center';
+  data.forEach((r,i) => { ctx.fillText(`P${r.pav}`, M.l+i*(bW*2.4)+bW, H-M.b+12); });
+
+  const lx = W-M.r+6;
+  [[isDark?'rgba(232,197,71,.75)':'rgba(180,130,0,.65)','Fw_X'],
+   [isDark?'rgba(91,164,245,.7)':'rgba(30,100,200,.55)','Fw_Y']].forEach(([c,l],i) => {
+    ctx.fillStyle = c; ctx.fillRect(lx,M.t+i*18,10,10);
+    ctx.fillStyle = isDark?'#8a93a6':'#737068'; ctx.textAlign='left'; ctx.fillText(l,lx+13,M.t+i*18+9);
+  });
+}
+
+/* ═══ RELATÓRIO ═══ */
 function gerarRelatorio() {
-  const div = document.getElementById('div-relatorio');
-  if(!div) return;
-  const npav = document.getElementById('l-npav')?.value||'—';
-  const ped = document.getElementById('l-ped')?.value||'—';
-  const H = document.getElementById('res-H')?.textContent||'—';
-  const Lx = document.getElementById('l-Lx')?.value||'—';
-  const Ly = document.getElementById('l-Ly')?.value||'—';
-  const grupo = document.getElementById('d-grupo')?.value||'—';
-  const fck = document.getElementById('d-fck')?.value||'25';
-  const cidade = document.getElementById('d-cidade')?.value||'—';
-  const ax = document.getElementById('al-ax')?.textContent||'—';
-  const ay = document.getElementById('al-ay')?.textContent||'—';
-  const gz = document.getElementById('gz-val')?.textContent||'—';
-  const gzx = document.getElementById('gztx-val')?.textContent||'—';
-  const gzy = document.getElementById('gzty-val')?.textContent||'—';
+  const d = {
+    grupo: gel('d-grupo')?.value || '—',
+    fck: gs('d-fck'), aco: gs('d-aco'), caa: gs('d-caa'),
+    cidade: gs('d-cidade') || '—', V0: gv('d-v0'),
+  };
+  const H = calcH();
+  const Lx = gv('l-Lx'), Ly = gv('l-Ly');
+  const n = gi('l-npav');
+  const Icx = pilares.reduce((s,p)=>s+p.bx*Math.pow(p.hx,3)/12,0);
+  const Icy = pilares.reduce((s,p)=>s+p.by*Math.pow(p.hy,3)/12,0);
+  const Nk = pilares.reduce((s,p)=>s+(p.Nd||0),0);
 
-  div.innerHTML = `
+  gel('div-relatorio').innerHTML = `
   <div class="card">
-    <div class="card-title"><div class="dot"></div>Identificação</div>
-    <table class="tbl">
-      <tr><td>Grupo / Integrantes</td><td>${grupo.replace(/\n/g,'<br>')}</td></tr>
-      <tr><td>fck</td><td>${fck} MPa</td></tr>
-      <tr><td>Localização</td><td>${cidade}</td></tr>
-      <tr><td>Data</td><td>${new Date().toLocaleDateString('pt-BR')}</td></tr>
-    </table>
+    <div class="ctitle"><div class="dot"></div>Identificação</div>
+    <table class="tbl"><tbody>
+      <tr><td style="color:var(--tx2)">Grupo</td><td style="white-space:pre-line">${d.grupo}</td></tr>
+      <tr><td style="color:var(--tx2)">fck</td><td style="color:var(--acc);font-weight:600">${d.fck} MPa</td></tr>
+      <tr><td style="color:var(--tx2)">Aço</td><td>${d.aco}</td></tr>
+      <tr><td style="color:var(--tx2)">Classe Agressividade</td><td>${d.caa}</td></tr>
+      <tr><td style="color:var(--tx2)">Localização</td><td>${d.cidade}</td></tr>
+      <tr><td style="color:var(--tx2)">V₀</td><td>${d.V0} m/s</td></tr>
+      <tr><td style="color:var(--tx2)">Data</td><td>${new Date().toLocaleDateString('pt-BR')}</td></tr>
+    </tbody></table>
   </div>
   <div class="card">
-    <div class="card-title"><div class="dot"></div>Etapa 1 — Geometria</div>
-    <table class="tbl">
-      <tr><td>N.º Pavimentos</td><td>${npav}</td></tr>
-      <tr><td>Pé-Direito</td><td>${ped} m</td></tr>
-      <tr><td>Altura Total H</td><td>${H}</td></tr>
-      <tr><td>Lx × Ly</td><td>${Lx} m × ${Ly} m</td></tr>
-      <tr><td>N.º Pilares</td><td>${pilares.length}</td></tr>
-    </table>
+    <div class="ctitle"><div class="dot"></div>Etapa 1 — Geometria e Pilares</div>
+    <table class="tbl"><tbody>
+      <tr><td style="color:var(--tx2)">N.º Pavimentos</td><td style="color:var(--acc);font-weight:600">${n}</td></tr>
+      <tr><td style="color:var(--tx2)">Altura Total H</td><td style="color:var(--acc);font-weight:600">${fmt(H)} m</td></tr>
+      <tr><td style="color:var(--tx2)">Lx × Ly</td><td>${fmt(Lx)} m × ${fmt(Ly)} m</td></tr>
+      <tr><td style="color:var(--tx2)">N.º Pilares</td><td>${pilares.length}</td></tr>
+      <tr><td style="color:var(--tx2)">ΣNd</td><td>${Nk} kN</td></tr>
+      <tr><td style="color:var(--tx2)">ΣIc_x</td><td>${Icx.toFixed(5)} m⁴</td></tr>
+      <tr><td style="color:var(--tx2)">ΣIc_y</td><td>${Icy.toFixed(5)} m⁴</td></tr>
+    </tbody></table>
   </div>
   <div class="card">
-    <div class="card-title"><div class="dot"></div>Etapa 4 — Parâmetros α e γZ</div>
-    <table class="tbl">
-      <tr><td>α_x</td><td>${ax}</td></tr>
-      <tr><td>α_y</td><td>${ay}</td></tr>
-      <tr><td>γZ (simples)</td><td>${gz}</td></tr>
-      <tr><td>γZ_x (tabela)</td><td>${gzx}</td></tr>
-      <tr><td>γZ_y (tabela)</td><td>${gzy}</td></tr>
-    </table>
+    <div class="ctitle"><div class="dot"></div>Etapa 3 — Vento</div>
+    <table class="tbl"><tbody>
+      <tr><td style="color:var(--tx2)">Categoria / Classe</td><td>${gs('d-cat')} / ${gs('d-cls')}</td></tr>
+      <tr><td style="color:var(--tx2)">Ca_x / Ca_y</td><td>${gv('d-cax')} / ${gv('d-cay')}</td></tr>
+      <tr><td style="color:var(--tx2)">Σ Fw_X total</td><td style="color:var(--acc);font-weight:600">${fmt(ventResult.cumX)} kN</td></tr>
+      <tr><td style="color:var(--tx2)">Σ Fw_Y total</td><td style="color:var(--acc);font-weight:600">${fmt(ventResult.cumY)} kN</td></tr>
+      <tr><td style="color:var(--tx2)">M₁_tot X</td><td>${fmt(ventResult.M1x)} kN·m</td></tr>
+      <tr><td style="color:var(--tx2)">M₁_tot Y</td><td>${fmt(ventResult.M1y)} kN·m</td></tr>
+    </tbody></table>
   </div>
-  `;
+  <div class="card">
+    <div class="ctitle"><div class="dot"></div>Notas de Validação — Método NBR 6123</div>
+    <div class="formula">Fórmulas validadas contra: Araújo, J.M. (2014). Projeto Estrutural de Edifícios
+de Concreto Armado. 3ª ed. Dunas, Rio Grande.
+
+S₂(z) = b·Fr·(z/10)^p  [Tab.1 NBR 6123]
+Fw_i  = Ca·q(zᵢ)·L_fachada·hᵢ  [eq.6.2.3 — aprox. por faixa]
+αa    = 1/(100·√H) ≥ 1/200  [eq.6.4.1 / CEB-90]
+αn    = √((1+1/n)/2)         [eq.6.4.2]
+Hi    = αa·αn·Fvi             [eq.6.4.3]
+K     = 3·EI_eq/H³            [eq.7.5.3 — carga conc.]
+γZ    = 1/(1−ΔM/M₁)          [NBR 6118 §15.5.3]</div>
+  </div>`;
 }
 
-// ===== INIT =====
-window.addEventListener('DOMContentLoaded', () => {
-  calcGeom();
-  calcPredim();
-  calcAcoes();
-  // seed default pilar
+/* ═══ RECALC ═══ */
+function recalcAll() {
+  calcGeom(); calcAcoes(); calcComb(); calcPredim();
+  syncAlphaFromPilares(); updateHdr();
+  gel('vento-params-info').innerHTML = [
+    [gs('d-cat'),'Categoria'],
+    [gs('d-cls'),'Classe'],
+    [gv('d-v0')+' m/s','V₀'],
+    [gv('d-cax')+' / '+gv('d-cay'),'Ca_x / Ca_y'],
+  ].map(([v,l])=>`<div class="metric"><div class="metric-v" style="font-size:14px">${v}</div><div class="metric-l">${l}</div></div>`).join('');
+}
+
+/* ═══ PILARES DEFAULT ═══ */
+function loadDefaultPilares() {
   pilares = [
-    {id:'P1',bx:0.20,hy:0.40,by:0.20,hx:0.40,Nd:600},
-    {id:'P2',bx:0.20,hy:0.40,by:0.20,hx:0.40,Nd:600},
-    {id:'P3',bx:0.20,hy:0.40,by:0.20,hx:0.40,Nd:500},
-    {id:'P4',bx:0.20,hy:0.40,by:0.20,hx:0.40,Nd:500},
+    {id:'P1',x:0.20,y:7.80,bx:.20,hx:.50,by:.20,hy:.50,Nd:600},
+    {id:'P2',x:4.00,y:7.80,bx:.20,hx:.50,by:.20,hy:.50,Nd:600},
+    {id:'P3',x:8.00,y:7.80,bx:.20,hx:.50,by:.20,hy:.50,Nd:600},
+    {id:'P4',x:12.0,y:7.80,bx:.20,hx:.50,by:.20,hy:.50,Nd:500},
+    {id:'P5',x:0.20,y:4.00,bx:.20,hx:.70,by:.70,hy:.20,Nd:700},
+    {id:'P6',x:4.00,y:4.00,bx:.20,hx:.70,by:.20,hy:.70,Nd:700},
+    {id:'P7',x:8.00,y:4.00,bx:.70,hx:.20,by:.20,hy:.70,Nd:700},
+    {id:'P8',x:12.0,y:4.00,bx:.20,hx:.70,by:.70,hy:.20,Nd:700},
+    {id:'P9',x:0.20,y:0.20,bx:.20,hx:.50,by:.20,hy:.50,Nd:500},
+    {id:'P10',x:4.00,y:0.20,bx:.20,hx:.50,by:.20,hy:.50,Nd:500},
+    {id:'P11',x:8.00,y:0.20,bx:.20,hx:.50,by:.20,hy:.50,Nd:500},
+    {id:'P12',x:12.0,y:0.20,bx:.20,hx:.50,by:.20,hy:.50,Nd:500},
   ];
-  renderPilares();
-  vigas = [{id:'V1',L:4,b:0.20,h:0.40,tipo:'Contínua'}];
-  renderVigas();
-  lajes = [{id:'L1',lx:4,ly:4,h:12,tipo:'Maciça'}];
-  renderLajes();
+  pilares.forEach(p => { p.Ix=p.bx*Math.pow(p.hx,3)/12; p.Iy=p.by*Math.pow(p.hy,3)/12; });
+}
+
+/* ═══ INIT ═══ */
+window.addEventListener('DOMContentLoaded', () => {
+  loadDefaultPilares();
+  setupCanvas();
+  recalcAll();
+  updatePilaresTable();
+  calcPredim();
+  calcGZ();
+  buildGZtable();
+  document.querySelectorAll('.sbar-item:not(.disabled)').forEach(item => {
+    item.addEventListener('click', function() {
+      document.querySelectorAll('.sbar-item').forEach(s=>s.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
 });
 </script>
 </body>
